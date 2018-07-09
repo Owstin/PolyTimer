@@ -1,0 +1,6 @@
+These are things I'm going to be adding in the future
+
+-color selection
+-font selection
+-custom themes
+-inspection times
