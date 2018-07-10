@@ -1,9 +1,25 @@
 These are things I'm going to be adding in the future
 
--color selection
--font selection
--custom themes
+scramble:
+-next/last scramble buttons
+-support for other cubes/puzzles
+
+timer:
 -inspection times
--hide timer during solves
--both ctrl keys held to start
+-hide time during solves
+-start button options
+
+solves table:
+-custom sorting (by number, best/worst times, etc)
+-store solves locally between sessions
+-import/export solves from database
+-create new sessions and store those
+
+theme:
+-custom color selection
+-custom font selection
+-background image support
+
+random:
 -connect to wca account
+-connect to stackmat
