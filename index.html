@@ -11,8 +11,8 @@
 <body>
     <div id="container">
         <div id="leftBlock">
-            <div id="solvesTable">
-                <table>
+            <div>
+                <table id="solvesTable">
                     <tr>
                         <td>#</td>
                         <td>solve time</td>
@@ -21,17 +21,16 @@
                     </tr>
                     <script>
                         var solves = ["null"];
+                        var tableContents = '';
 
-                        function drawSolveTable() {
-                            var i;
-
-                            for (i = 1; i <= (solves.length)-1; i++) {
-                                document.write('<tr><td>' + i + '</td>');
-                                document.write('<td>' + solves[i] + '</td>');
-                                document.write('<td>ao5</td>');
-                                document.write('<td>ao12</td></tr>');
-                            }
+                        for (var i = 1; i <= (solves.length)-1; i++) {
+                            tableContents += '<tr><td>' + i + '</td>';
+                            tableContents += '<td>' + solves[i] + '</td>';
+                            tableContents += '<td>ao5</td>';
+                            tableContents += '<td>ao12</td></tr>';
                         }
+
+                        document.write(tableContents);
                     </script>
                 </table>
             </div>

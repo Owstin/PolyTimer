@@ -4,3 +4,6 @@ These are things I'm going to be adding in the future
 -font selection
 -custom themes
 -inspection times
+-hide timer during solves
+-both ctrl keys held to start
+-connect to wca account
