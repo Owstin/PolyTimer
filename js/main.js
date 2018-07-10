@@ -7,7 +7,7 @@ var generatedScramble = scramblers["333"].getRandomScramble().scramble_string;
 
 var table = document.getElementById("solvesTable");
 
-//Stops the space bar from scrolling the page down
+//Stop the space bar from scrolling the page down
 window.onkeydown = function(e) { 
     return !(e.keyCode == 32);
 };
@@ -16,8 +16,10 @@ document.body.onkeyup = function(e) {
     if (e.keyCode == 32) {
         if (watch.isOn) {
             watch.stop();
-            solves.push(formattedTime);
             timer.style.color = 'white';
+
+            var floatTime = parseFloat(formattedTime);
+            solves.push(floatTime);
 
             var row = table.insertRow(-1);
             var col1 = row.insertCell(0);
@@ -25,12 +27,42 @@ document.body.onkeyup = function(e) {
             var col3 = row.insertCell(2);
             var col4 = row.insertCell(3);
 
-            col1.innerHTML = solves.length-1;
-            col2.innerHTML = formattedTime;
-            col3.innerHTML = 'ao5';
-            col4.innerHTML = 'ao12';
+            var total = 0;
 
-            console.log(solves);
+            for (var i = 0; i < solves.length; i++) {
+                total += solves[i];
+            }
+
+            var sAvg = total / solves.length; //session average
+
+            if (solves.length > 5) {
+                var last5 = solves.slice(Math.max(solves.length - 5, 1));
+                var sumOf5 = 0;
+
+                for (var i = 0; i < 5; i++) {
+                    sumOf5 += last5[i];
+                }
+
+                ao5 = sumOf5 / 5;
+
+            } else ao5 = sAvg;
+
+            if (solves.length > 12) {
+                var last12 = solves.slice(Math.max(solves.length - 12, 1));
+                var sumOf12 = 0;
+
+                for (var i = 0; i < 12; i++) {
+                    sumOf12 += last12[i];
+                }
+
+                ao5 = sumOf12 / 12;
+
+            } else ao12 = sAvg;
+
+            col1.innerHTML = solves.length;
+            col2.innerHTML = floatTime.toFixed(2);
+            col3.innerHTML = ao5.toFixed(2);
+            col4.innerHTML = ao12.toFixed(2);
         } else {
             watch.start();
             timer.style.color = 'white';

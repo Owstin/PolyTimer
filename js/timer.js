@@ -58,9 +58,6 @@ function Timer(elem) {
             clearInterval(interval);
             interval = null;
             this.isOn = false;
-
-            console.log(time);
-            console.log(formattedTime);
         }
     };
 
