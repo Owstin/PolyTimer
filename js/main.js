@@ -5,8 +5,6 @@ var scramble = document.getElementById('scramble');
 var watch = new Timer(timer);
 var generatedScramble = scramblers["333"].getRandomScramble().scramble_string;
 
-ready.style.visibility = "hidden";
-
 //Stops the space bar from scrolling the page down
 window.onkeydown = function(e) { 
     return !(e.keyCode == 32);
@@ -16,9 +14,10 @@ document.body.onkeyup = function(e) {
     if (e.keyCode == 32) {
         if (watch.isOn) {
             watch.stop();
+            timer.style.color = 'white';
         } else {
             watch.start();
-            ready.style.visibility = "hidden";
+            timer.style.color = 'white';
             scramble.textContent = generatedScramble;
         }
     }
@@ -27,8 +26,8 @@ document.body.onkeyup = function(e) {
 document.body.onkeydown = function(e) {
     if (e.keyCode == 32) {
         if (!watch.isOn) {
-            ready.style.visibility = "visible";
             watch.reset();
+            timer.style.color = 'red';
         } else {
             generatedScramble = scramblers["333"].getRandomScramble().scramble_string;
         }
