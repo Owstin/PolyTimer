@@ -43,7 +43,7 @@ document.body.onkeyup = function(e) {
                     sumOf5 += last5[i];
                 }
 
-                ao5 = sumOf5 / 5;
+                ao5 = sumOf5 / 5; //current average of 5
 
             } else ao5 = sAvg;
 
@@ -55,7 +55,7 @@ document.body.onkeyup = function(e) {
                     sumOf12 += last12[i];
                 }
 
-                ao5 = sumOf12 / 12;
+                ao12 = sumOf12 / 12; //current average of 12
 
             } else ao12 = sAvg;
 
