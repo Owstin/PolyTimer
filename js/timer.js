@@ -1,3 +1,5 @@
+var formattedTime;
+
 function Timer(elem) {
     var time = 0;
     var interval;
@@ -8,7 +10,7 @@ function Timer(elem) {
             time += delta();
         }
 
-        var formattedTime = timeFormatter(time);
+        formattedTime = timeFormatter(time);
         elem.textContent = formattedTime;
     }
 
@@ -56,6 +58,9 @@ function Timer(elem) {
             clearInterval(interval);
             interval = null;
             this.isOn = false;
+
+            console.log(time);
+            console.log(formattedTime);
         }
     };
 

@@ -12,22 +12,28 @@
     <div id="container">
         <div id="leftBlock">
             <div id="solvesTable">
-                <script>
-                    //Create solves table
-                    var table = '';
-                    var rows = 40;
-                    var cols = 4;
+                <table>
+                    <tr>
+                        <td>#</td>
+                        <td>solve time</td>
+                        <td>ao5</td>
+                        <td>ao12</td>
+                    </tr>
+                    <script>
+                        var solves = ["null"];
 
-                    for (var r = 0; r < rows; r++) {
-                        table += '<tr>';
-                        for (var c = 1; c <= cols; c++) {
-                            table += '<td>' + c + '</td>';
+                        function drawSolveTable() {
+                            var i;
+
+                            for (i = 1; i <= (solves.length)-1; i++) {
+                                document.write('<tr><td>' + i + '</td>');
+                                document.write('<td>' + solves[i] + '</td>');
+                                document.write('<td>ao5</td>');
+                                document.write('<td>ao12</td></tr>');
+                            }
                         }
-                        table += '</tr>';
-                    }
-
-                    document.write('<table id="solvesTable">' + table + '</table>');
-                </script>
+                    </script>
+                </table>
             </div>
         </div>
 
@@ -37,7 +43,7 @@
                     <h3 id="scramble" style="margin-top: -150px;"><script>document.write(scramblers["333"].getRandomScramble().scramble_string);</script></h3>
                     <h1 id="timer">0.00</h1>
                     
-                    <h6 style="margin-top: 250px;"><a id="footerLink" href="http://twitter.com/treedot">@treedot</a> | <a id="footerLink" href="changelog.txt">changelog</a> | <a id="footerLink" href="todo.txt">to do list</a></h6>
+                    <h6 style="margin-top: 250px;"><a id="footerLink" href="http://twitter.com/treedot">@treedot</a> | <a id="footerLink" href="https://github.com/Treedot/treedot.github.io/issues">feature requests</a> | <a id="footerLink" href="todo.txt">to do list</a></h6>
                     
                     <script src="js/timer.js"></script>
                     <script src="js/main.js"></script>

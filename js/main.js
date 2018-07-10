@@ -14,7 +14,11 @@ document.body.onkeyup = function(e) {
     if (e.keyCode == 32) {
         if (watch.isOn) {
             watch.stop();
+            solves.push(formattedTime);
+            drawSolveTable();
             timer.style.color = 'white';
+
+            console.log(solves);
         } else {
             watch.start();
             timer.style.color = 'white';
