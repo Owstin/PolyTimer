@@ -96,4 +96,20 @@ document.body.onkeydown = function(e) {
             //generatedScramble = scramblers["333"].getRandomScramble().scramble_string;
         }
     }
+
+    if (e.keyCode == 8 && solves.length > 0) {
+        var delConfirm = confirm("delete last solve?");
+
+        if (delConfirm == true) {
+            solves.pop();
+            ao5s.pop();
+            ao12s.pop();
+
+            var row = table.deleteRow(-1);
+
+            localStorage.setItem("solves", JSON.stringify(solves));
+            localStorage.setItem("ao5s", JSON.stringify(ao5s));
+            localStorage.setItem("ao12s", JSON.stringify(ao12s));
+        }
+    }
 }

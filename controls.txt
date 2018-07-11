@@ -1,0 +1,2 @@
+space bar starts and stops the timer
+backspace deletes your most recent solve

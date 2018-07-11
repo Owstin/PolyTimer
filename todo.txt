@@ -8,13 +8,15 @@ timer:
 -inspection times
 -hide time during solves
 -start button options
+-hold for a few seconds to start
 
 solves table:
 -custom sorting (by number, best/worst times, etc)
 -store solves locally between sessions
 -import/export solves from database
 -create new sessions and store those
--delete last scramble
+-delete last solve
+-manually add solves
 
 theme:
 -custom color selection
