@@ -14,6 +14,7 @@ solves table:
 -store solves locally between sessions
 -import/export solves from database
 -create new sessions and store those
+-delete last scramble
 
 theme:
 -custom color selection

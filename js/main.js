@@ -5,6 +5,11 @@ var scramble = document.getElementById('scramble');
 var watch = new Timer(timer);
 var generatedScramble = scramblers["333"].getRandomScramble().scramble_string;
 
+var scrambles = [];
+var scrambleIndex = 0;
+
+scramble.textContent = generatedScramble;
+
 var table = document.getElementById("solvesTable");
 
 //Stop the space bar from scrolling the page down
@@ -63,10 +68,21 @@ document.body.onkeyup = function(e) {
             col2.innerHTML = floatTime.toFixed(2);
             col3.innerHTML = ao5.toFixed(2);
             col4.innerHTML = ao12.toFixed(2);
+
+            ao5s.push(ao5.toFixed(2));
+            ao12s.push(ao12.toFixed(2));
+
+            localStorage.setItem("solves", JSON.stringify(solves));
+            localStorage.setItem("ao5s", JSON.stringify(ao5s));
+            localStorage.setItem("ao12s", JSON.stringify(ao12s));
         } else {
             watch.start();
             timer.style.color = 'white';
+            
+            generatedScramble = scramblers["333"].getRandomScramble().scramble_string;
+            scrambles.push(generatedScramble);
             scramble.textContent = generatedScramble;
+            scrambleIndex += 1;
         }
     }
 }
@@ -77,7 +93,7 @@ document.body.onkeydown = function(e) {
             watch.reset();
             timer.style.color = 'red';
         } else {
-            generatedScramble = scramblers["333"].getRandomScramble().scramble_string;
+            //generatedScramble = scramblers["333"].getRandomScramble().scramble_string;
         }
     }
 }
