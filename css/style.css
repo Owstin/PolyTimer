@@ -69,8 +69,9 @@ tr:nth-child(even) {
 
 #timer {
     font-family: "digital";
-    font-size: 150px;
+    font-size: 175px;
     font-weight: 300;
+    margin-top: 175px;
 }
 
 #footerLink {
