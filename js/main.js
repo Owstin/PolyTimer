@@ -98,7 +98,7 @@ document.body.onkeydown = function(e) {
     }
 
     if (e.keyCode == 8 && solves.length > 0) {
-        var delConfirm = confirm("delete last solve?");
+        var delConfirm = confirm("Delete last solve?");
 
         if (delConfirm == true) {
             solves.pop();

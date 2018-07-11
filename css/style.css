@@ -75,5 +75,30 @@ tr:nth-child(even) {
 
 #footerLink {
     text-decoration: none;
-    color: #333;
+    color: #444;
+}
+
+#footerLink:hover {
+    text-decoration: underline;
+    color: #666;
+}
+
+#logoBox {
+    padding: 10px;
+    padding-left: 15px;
+    font-size: 24px;
+    cursor: default;
+}
+
+#gearSymbol {
+    font-family: Arial;
+    font-size: 24px;
+    font-weight: bold;
+    padding-right: 15px;
+    color: #444;
+}
+
+#gearSymbol:hover {
+    color: #FFF;
+    cursor: pointer;
 }
