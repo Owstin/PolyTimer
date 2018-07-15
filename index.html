@@ -3,9 +3,32 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>solvecu.be</title>
+    <title>PolyTimer</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="shortcut icon" type="image/png" href="img/favicon-96x96.png"/>
+
+    <!--standard scrambles-->
+    <script src="jsss-master/scramble_222.js"></script>
     <script src="jsss-master/scramble_333.js"></script>
+    <script src="jsss-master/scramble_NNN.js"></script>
+
+    <!--other scrambles-->
+    <script src="jsss-master/scramble_minx.js"></script>
+    <script src="jsss-master/scramble_pyram.js"></script>
+    <script src="jsss-master/scramble_sq1.js"></script>
+    <script src="jsss-master/scramble_clock.js"></script>
+
+    <!--scramble changer-->
+    <script>
+        function changeScramble() {
+            var selectBox = document.getElementById("selectBoxScramble");
+            var selectedVal = selectBox.options[selectBox.selectedIndex].value;
+
+            scrambleType = selectedVal;
+            localStorage.setItem("scrambleType", JSON.stringify(scrambleType));
+            location.reload();
+        }
+    </script>
 </head>
 
 <body>
@@ -13,7 +36,11 @@
         <div id="leftBlock">
             <div>
                 <table id="solvesTable">
-                    <tr>
+                    <th colspan="3" align="left" id="logoBox">PolyTimer</th>
+                    <th colspan="1" align="right" id="gearSymbol">
+                        &#9965; <!--gear symbol thing-->
+                    </th>
+                    <tr style="background-color: #222;">
                         <td>#</td>
                         <td>solve time</td>
                         <td>ao5</td>
@@ -32,7 +59,7 @@
 
                         var tableContents = '';
 
-                        for (var i = 0; i < solves.length; i++) {
+                        for (i = solves.length; i--;) {
                             tableContents += '<tr><td>' + (i+1) + '</td>';
                             tableContents += '<td>' + solves[i].toFixed(2) + '</td>';
                             tableContents += '<td>' + ao5s[i] + '</td>';
@@ -51,14 +78,96 @@
                     <h3 id="scramble" style="margin-top: -150px;"><script>/*document.write(scramblers["333"].getRandomScramble().scramble_string);*/</script></h3>
                     <h1 id="timer">0.00</h1>
                     
-                    <h6 style="margin-top: 250px;"><a id="footerLink" href="http://twitter.com/treedot">@treedot</a>&nbsp;&nbsp;&nbsp;<a id="footerLink" href="https://github.com/Treedot/treedot.github.io/issues">feature requests</a>&nbsp;&nbsp;&nbsp;<a id="footerLink" href="todo.txt">to do list</a>&nbsp;&nbsp;&nbsp;<a id="footerLink" href="controls.txt">controls</a></h6>
-                    
                     <script src="js/timer.js"></script>
                     <script src="js/main.js"></script>
                 </div>
             </div>
         </div>
     </div>
+
+    <!--settings menu stuff below-->
+    <div id="settingsMenu" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <div class="modal-header">
+            <span class="close">&times;</span>
+            <h3 style="text-align: left;">Settings</h3>
+          </div>
+          <div class="modal-body">
+
+            <p>Scramble type:
+            <select id="selectBoxScramble" onchange="changeScramble()">
+                <option value="222">2x2</option>
+                <option value="333" selected="selected">3x3</option>
+                <option value="444">4x4</option>
+                <option value="555">5x5</option>
+                <option value="666">6x6</option>
+                <option value="777">7x7</option>
+                <option value="333bf">3x3 BLD</option>
+            </select></p>
+
+            <p>Theme:
+            <select id="selectBoxTheme" onchange="changeTheme()">
+                <option value="dark" selected="selected">Dark</option>
+            </select></p>
+
+            <p><input type="checkbox" id="selectBoxTheme" checked disabled> Show time while solving?</p>
+            <hr>
+
+            <p>Controls:</p>
+            <p><b>Start/Stop the timer:</b> Space bar</p>
+            <p><b>Delete the last solve:</b> Backspace</p>
+            <p><b>Last scramble:</b> Left arrow key</p>
+            <p><b>Next scramble:</b> Right arrow key</p>
+            <hr><br>
+            <a style="color: #FFF;" href="" onclick="localStorage.clear()">[Click here to clear all of your solves]</a>
+            <br><br>
+            <p>If you'd like to request any features, please click the link below.</p>
+          </div>
+          <div class="modal-footer">
+                <h5>
+                    <a id="footerLink" target="_blank" href="http://twitter.com/treedot">contact</a>&nbsp;&nbsp;&nbsp;
+                    <a id="footerLink" target="_blank" href="https://github.com/Treedot/treedot.github.io/issues">feature requests</a>&nbsp;&nbsp;&nbsp;
+                    <a id="footerLink" target="_blank" href="todo.txt">to do list</a>
+                </h5>
+          </div>
+        </div>
+      
+      </div>
+
+      <script>
+        var settingsOpen = false;
+
+        // Get the modal
+        var modal = document.getElementById('settingsMenu');
+        
+        // Get the button that opens the modal
+        var gearSymbol = document.getElementById("gearSymbol");
+        
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+        
+        // When the user clicks the button, open the modal 
+        gearSymbol.onclick = function() {
+            modal.style.display = "flex";
+            settingsOpen = true;
+        }
+        
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+            settingsOpen = false;
+        }
+        
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                settingsOpen = false;
+            }
+        }
+        </script>
 </body>
 
 </html>

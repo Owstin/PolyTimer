@@ -1,0 +1,1 @@
+top of the table border deforms a bit when solves are added (under PolyTimer text)
