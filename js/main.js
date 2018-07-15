@@ -155,8 +155,12 @@ document.body.onkeydown = function(e) {
     }
 
     if (e.keyCode == 8 && solves.length > 0) {
+<<<<<<< HEAD
         if (!watch.isOn) {
             var delConfirm = confirm("Delete last solve?");
+=======
+        var delConfirm = confirm("Delete last solve?");
+>>>>>>> 3a5e8f8e71c2416e92f5c43a29f52dfb92c45177
 
             if (delConfirm == true) {
                 solves.pop();

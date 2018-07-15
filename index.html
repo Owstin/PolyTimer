@@ -10,6 +10,7 @@
     <!--standard scrambles-->
     <script src="jsss-master/scramble_222.js"></script>
     <script src="jsss-master/scramble_333.js"></script>
+<<<<<<< HEAD
     <script src="jsss-master/scramble_NNN.js"></script>
 
     <!--other scrambles-->
@@ -27,6 +28,13 @@
             scrambleType = selectedVal;
             localStorage.setItem("scrambleType", JSON.stringify(scrambleType));
             location.reload();
+=======
+
+    <!--Settings menu-->
+    <script>
+        function settingsMenuOpen() {
+            alert('This button doesn\'t do anything yet, but thank you for trying. \nSpace starts and stops the timer, \nbackspace deletes your last solve.');
+>>>>>>> 3a5e8f8e71c2416e92f5c43a29f52dfb92c45177
         }
     </script>
 </head>
@@ -37,10 +45,15 @@
             <div>
                 <table id="solvesTable">
                     <th colspan="3" align="left" id="logoBox">PolyTimer</th>
+<<<<<<< HEAD
                     <th colspan="1" align="right" id="gearSymbol">
                         &#9965; <!--gear symbol thing-->
                     </th>
                     <tr style="background-color: #222;">
+=======
+                    <th colspan="1" align="right" id="gearSymbol" onclick="settingsMenuOpen()">&#9965;</th>
+                    <tr>
+>>>>>>> 3a5e8f8e71c2416e92f5c43a29f52dfb92c45177
                         <td>#</td>
                         <td>solve time</td>
                         <td>ao5</td>

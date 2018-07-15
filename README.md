@@ -1,4 +1,8 @@
-# solvecube
-an open source cube timer
+# PolyTimer
+An open source cube timer
 
-submit your feature requests under the issues tab
+#This project has moved to polytimer.net
+
+Space starts and stops the timer
+
+Backspace deletes your last solve
