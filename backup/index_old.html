@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PolyTimer</title>
+
+    <link rel="shortcut icon" type="image/png" href="img/favicon-96x96.png"/>
+
+    <link rel="stylesheet" type="text/css" href="css/dark.css" title="default">
+    <link rel="alternate stylesheet" type="text/css" href="css/light.css" title="light">
+    <script type="text/javascript" src="js/styleswitcher.js"></script>
+
+    <!--standard scrambles-->
+    <script src="jsss-master/scramble_222.js"></script>
+    <script src="jsss-master/scramble_333.js"></script>
+    <script src="jsss-master/scramble_NNN.js"></script>
+
+    <!--other scrambles-->
+    <script src="jsss-master/scramble_minx.js"></script>
+    <script src="jsss-master/scramble_pyram.js"></script>
+    <script src="jsss-master/scramble_sq1.js"></script>
+    <script src="jsss-master/scramble_clock.js"></script>
+
+    <!--scramble changer-->
+    <script>
+        function changeScramble() {
+            var selectBox = document.getElementById("selectBoxScramble");
+            var selectedVal = selectBox.options[selectBox.selectedIndex].value;
+
+            scrambleType = selectedVal;
+            localStorage.setItem("scrambleType", JSON.stringify(scrambleType));
+            location.reload();
+        }
+
+        function timeFormatter(s) {
+            // Pad to 2 or 3 digits, default is 2
+            function pad(n, z) {
+            z = z || 2;
+            return ('00' + n).slice(-z);
+            }
+        
+            var ms = s % 1000;
+            s = (s - ms) / 1000;
+            var secs = s % 60;
+            s = (s - secs) / 60;
+            var mins = s % 60;
+            var hrs = (s - mins) / 60;
+        
+            if (hrs > 0) {
+                if (mins > 9) {
+                    if (ms > 9) {
+                        return hrs + ':' + mins + ':' + pad(secs) + '.' + ms;
+                    } else {
+                        return hrs + ':' + mins + ':' + pad(secs) + '.' + pad(ms);
+                    }
+                } else {
+                    if (ms > 9) {
+                        return hrs + ':' + pad(mins) + ':' + pad(secs) + '.' + ms;
+                    } else {
+                        return hrs + ':' + pad(mins) + ':' + pad(secs) + '.' + pad(ms);
+                    }
+                }
+            } else {
+                if (mins > 0) {
+                    if (ms > 9) {
+                        return pad(mins) + ':' + pad(secs) + '.' + ms;
+                    } else {
+                        return pad(mins) + ':' + pad(secs) + '.' + pad(ms);
+                    }
+                } else {
+                    if (ms > 9) {
+                        return secs + '.' + ms;
+                    } else {
+                        return secs + '.' + pad(ms);
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="container">
+        <div id="leftBlock">
+            <div>
+                <table id="solvesTable">
+                    <th colspan="3" align="left" id="logoBox">PolyTimer</th>
+                    <th colspan="1" align="right" id="gearSymbol">
+                        &#9965; <!--gear symbol thing-->
+                    </th>
+                    <tr id="headerBox">
+                        <td id="solvesTd">#</td>
+                        <td id="solvesTd">solve time</td>
+                        <td id="solvesTd">ao5</td>
+                        <td id="solvesTd">ao12</td>
+                    </tr>
+                    <script>
+                        if (localStorage.getItem("solves") === null) {
+                            var solves = [];
+                            var ao5s = [];
+                            var ao12s = [];
+                        } else {
+                            var solves = JSON.parse(localStorage.getItem("solves"));
+                            var ao5s = JSON.parse(localStorage.getItem("ao5s"));
+                            var ao12s = JSON.parse(localStorage.getItem("ao12s"));
+                        }
+
+                        var tableContents = '';
+
+                        for (i = solves.length; i--;) {
+                            tableContents += '<tr id="solvesTr"><td id="solvesTd">' + (i+1) + '</td>';
+                            tableContents += '<td id="solvesTd">' + timeFormatter(solves[i]) + '</td>';
+                            tableContents += '<td id="solvesTd">' + timeFormatter(ao5s[i]) + '</td>';
+                            tableContents += '<td id="solvesTd">' + timeFormatter(ao12s[i]) + '</td></tr>';
+                        }
+
+                        document.write(tableContents);
+                    </script>
+                </table>
+            </div>
+        </div>
+
+        <div id="rightBlock">
+            <div id="rightBlockFixed">
+                <div id="timerElements">
+                    <h3 id="scramble" style="margin-top: -150px;"><script>/*document.write(scramblers["333"].getRandomScramble().scramble_string);*/</script></h3>
+                    <h1 id="timer">0.00</h1>
+                    
+                    <script src="js/timer.js"></script>
+                    <script src="js/main.js"></script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--settings menu stuff below-->
+    <div id="settingsMenu" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <div class="modal-header">
+            <span class="close">&times;</span>
+            <h3 style="text-align: left;">Settings</h3>
+          </div>
+          <div class="modal-body">
+
+            <!--settings table-->
+            <br>
+            <table>
+                <tr>
+                    <td style="padding: 2px; width: 75px;">Scramble:</td>
+                    <td style="padding: 2px;">
+                    <select id="selectBoxScramble" onchange="changeScramble()">
+                        <option value="222">2x2</option>
+                        <option value="333" selected="selected">3x3</option>
+                        <option value="444">4x4</option>
+                        <option value="555">5x5</option>
+                        <option value="666">6x6</option>
+                        <option value="777">7x7</option>
+                        <option value="333bf">3x3 BLD</option>
+                    </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding: 2px;">Theme:</td>
+                    <td style="padding: 2px;">
+                        <select id="selectBoxTheme">
+                            <option value="dark" selected="selected" onclick="setActiveStyleSheet('default'); location.reload();">Dark</option>
+                            <option value="light" onclick="setActiveStyleSheet('light'); location.reload();">Light</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <table>
+                <tr>
+                    <td style="padding: 2px;"><input type="checkbox" id="selectBoxTheme" checked disabled></td><td style="padding: 2px;"> Show time while solving? (not yet implemented)</td>
+                </tr>
+            </table>
+
+            <hr>
+
+            <p>Controls:</p>
+            <p><b>Start/Stop the timer:</b> Space bar</p>
+            <p><b>Delete the last solve:</b> Backspace</p>
+            <p><b>Last scramble:</b> Left arrow key</p>
+            <p><b>Next scramble:</b> Right arrow key</p>
+            <hr><br>
+            <a id="clearLink" href="" onclick="localStorage.clear()">[Click here to clear all of your solves]</a>
+            <br><br>
+            <p>If you'd like to request any features, please click the link below.</p>
+          </div>
+          <div class="modal-footer">
+                <h5 id="version">v1.21</h5>
+                <h5>
+                    <a id="footerLink" target="_blank" href="http://twitter.com/treedot">contact</a>&nbsp;&nbsp;&nbsp;
+                    <a id="footerLink" target="_blank" href="https://github.com/Treedot/treedot.github.io/issues">feature requests</a>&nbsp;&nbsp;&nbsp;
+                    <a id="footerLink" target="_blank" href="todo.txt">to do list</a>
+                </h5>
+          </div>
+        </div>
+      
+      </div>
+
+      <script>
+        var settingsOpen = false;
+
+        // Get the modal
+        var modal = document.getElementById('settingsMenu');
+        
+        // Get the button that opens the modal
+        var gearSymbol = document.getElementById("gearSymbol");
+        
+        // When the user clicks the button, open the modal 
+        gearSymbol.onclick = function() {
+            if (modal.style.display == "flex") {
+                modal.style.display = "none";
+                settingsOpen = false;
+            } else {
+                modal.style.display = "flex";
+                settingsOpen = true;
+            }
+        }
+        </script>
+</body>
+
+</html>

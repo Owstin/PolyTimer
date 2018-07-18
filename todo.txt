@@ -6,7 +6,7 @@ scramble:
 timer:
 -inspection times
 -hide time during solves
--start button options
+-start key options
 -hold for a few seconds to start
 
 solves table:
@@ -17,15 +17,21 @@ solves table:
 -DNF and +2
 
 theme:
+-more preset themes
 -custom color selection
 -custom font selection
--background image support
+-background images
 
-random:
+misc:
 -connect to wca account
 -connect to stackmat
 -mobile site + controls
+-statistics (ao100, session average, etc)
 
-credit:
+other:
+-find a way to not have to reload when switching themes
+
+special thanks:
 Kleb
 Flowery Dragon
+Xetni14

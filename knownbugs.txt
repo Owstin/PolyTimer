@@ -1,1 +1,2 @@
-top of the table border deforms a bit when solves are added (under PolyTimer text)
+-3x3 BLD scrambles are identical to 3x3 scrambles for some reason
+-the discord button (bottom right) is not clickable while the menu is open

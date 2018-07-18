@@ -4,13 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <title>PolyTimer</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+
     <link rel="shortcut icon" type="image/png" href="img/favicon-96x96.png"/>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css" title="default">
+    <link rel="alternate stylesheet" type="text/css" href="css/light.css" title="light">
+
+    <script type="text/javascript" src="js/styleswitcher.js"></script>
 
     <!--standard scrambles-->
     <script src="jsss-master/scramble_222.js"></script>
     <script src="jsss-master/scramble_333.js"></script>
-<<<<<<< HEAD
     <script src="jsss-master/scramble_NNN.js"></script>
 
     <!--other scrambles-->
@@ -21,111 +25,212 @@
 
     <!--scramble changer-->
     <script>
+        function clearSolves() {
+            if (confirm("Really clear all of your solves?") == true) {
+                localStorage.clear();
+                window.location.reload(true);
+            }
+        }
+
+        function updateThemeBox() {
+            var selectBox = document.getElementById("selectBoxTheme");
+            selectBox.value = getActiveStyleSheet();
+        }
+
+        function updateScrambleBox() {
+            var selectBox = document.getElementById("selectBoxScramble");
+
+            if (localStorage.getItem("scrambleType") === null) {
+                selectBox.value = "333";
+            } else {
+                selectBox.value = JSON.parse(localStorage.getItem("scrambleType"));
+            }
+        }
+
+        function changeTheme() {
+            var selectBox = document.getElementById("selectBoxTheme");
+            var theme = selectBox.value;
+
+            setActiveStyleSheet(theme);
+            window.location.reload(true);
+        }
+
         function changeScramble() {
             var selectBox = document.getElementById("selectBoxScramble");
             var selectedVal = selectBox.options[selectBox.selectedIndex].value;
 
             scrambleType = selectedVal;
             localStorage.setItem("scrambleType", JSON.stringify(scrambleType));
-            location.reload();
-=======
+            window.location.reload(true);
+        }
 
-    <!--Settings menu-->
-    <script>
-        function settingsMenuOpen() {
-            alert('This button doesn\'t do anything yet, but thank you for trying. \nSpace starts and stops the timer, \nbackspace deletes your last solve.');
->>>>>>> 3a5e8f8e71c2416e92f5c43a29f52dfb92c45177
+        function timeFormatter(s) {
+            var ms = s % 1000;
+            s = (s - ms) / 1000;
+            var secs = s % 60;
+            s = (s - secs) / 60;
+            var mins = s % 60;
+            var hrs = (s - mins) / 60;
+
+            ms = Math.round(ms/10);
+
+            if (hrs > 0) {
+
+            } else {
+                if (mins > 0) {
+                    if (secs < 9) {
+                        if (ms < 9) {
+                            return mins + ':0' + secs + '.0' + ms;
+                        } else {
+                            return mins + ':0' + secs + '.' + ms;
+                        }
+                    } else {
+                        if (ms < 9) {
+                            return mins + ':' + secs + '.0' + ms;
+                        } else {
+                            return mins + ':' + secs + '.' + ms;
+                        }
+                    }
+                } else {
+                    if (ms < 9) {
+                        return secs + '.0' + ms;
+                    } else {
+                        return secs + '.' + ms;
+                    }
+                }
+            }
         }
     </script>
 </head>
 
-<body>
+<body onload="updateScrambleBox(); updateThemeBox();">
     <div id="container">
+        <div id="topBar">
+            <span id="menuButton">&#9776;</span>
+            <span id="logoText">PolyTimer</span>
+        </div>
+        <div id="fillerBar"></div>
         <div id="leftBlock">
-            <div>
-                <table id="solvesTable">
-                    <th colspan="3" align="left" id="logoBox">PolyTimer</th>
-<<<<<<< HEAD
-                    <th colspan="1" align="right" id="gearSymbol">
-                        &#9965; <!--gear symbol thing-->
-                    </th>
-                    <tr style="background-color: #222;">
-=======
-                    <th colspan="1" align="right" id="gearSymbol" onclick="settingsMenuOpen()">&#9965;</th>
-                    <tr>
->>>>>>> 3a5e8f8e71c2416e92f5c43a29f52dfb92c45177
-                        <td>#</td>
-                        <td>solve time</td>
-                        <td>ao5</td>
-                        <td>ao12</td>
-                    </tr>
-                    <script>
-                        if (localStorage.getItem("solves") === null) {
-                            var solves = [];
-                            var ao5s = [];
-                            var ao12s = [];
+            <table id="solvesTable">
+                <tr id="headerTr">
+                    <td id="solvesTd">#</td>
+                    <td id="solvesTd">solve time</td>
+                    <td id="solvesTd">ao5</td>
+                    <td id="solvesTd">ao12</td>
+                </tr>
+                <script>
+                    if (localStorage.getItem("solves") === null) {
+                        var solves = [];
+                        var ao5s = [];
+                        var ao12s = [];
+                    } else {
+                        var solves = JSON.parse(localStorage.getItem("solves"));
+                        var ao5s = JSON.parse(localStorage.getItem("ao5s"));
+                        var ao12s = JSON.parse(localStorage.getItem("ao12s"));
+                    }
+
+                    var tableContents = '';
+
+                    for (i = solves.length; i--;) {
+                        var timeFormatted = timeFormatter(solves[i]);
+                        var timeFloated = parseFloat(timeFormatted).toFixed(2);
+
+                        var ao5Formatted = timeFormatter(ao5s[i]);
+                        var ao5Floated = parseFloat(ao5Formatted).toFixed(2);
+
+                        var ao12Formatted = timeFormatter(ao12s[i]);
+                        var ao12Floated = parseFloat(ao12Formatted).toFixed(2);
+                        
+                        tableContents += '<tr id="solvesTr"><td id="solvesTd">' + (i+1) + '</td>';
+
+                        //solves
+                        if (timeFormatted.includes(":")) {
+                            tableContents += '<td id="solvesTd">' + timeFormatted + '</td>';
                         } else {
-                            var solves = JSON.parse(localStorage.getItem("solves"));
-                            var ao5s = JSON.parse(localStorage.getItem("ao5s"));
-                            var ao12s = JSON.parse(localStorage.getItem("ao12s"));
+                            tableContents += '<td id="solvesTd">' + timeFloated + '</td>';
                         }
 
-                        var tableContents = '';
-
-                        for (i = solves.length; i--;) {
-                            tableContents += '<tr><td>' + (i+1) + '</td>';
-                            tableContents += '<td>' + solves[i].toFixed(2) + '</td>';
-                            tableContents += '<td>' + ao5s[i] + '</td>';
-                            tableContents += '<td>' + ao12s[i] + '</td></tr>';
+                        //ao5
+                        if (ao5Formatted.includes(":")) {
+                            tableContents += '<td id="solvesTd">' + ao5Formatted + '</td>';
+                        } else {
+                            tableContents += '<td id="solvesTd">' + ao5Floated + '</td>';
                         }
 
-                        document.write(tableContents);
-                    </script>
-                </table>
-            </div>
+                        //ao12
+                        if (ao12Formatted.includes(":")) {
+                            tableContents += '<td id="solvesTd">' + ao12Formatted + '</td>';
+                        } else {
+                            tableContents += '<td id="solvesTd">' + ao12Floated + '</td>';
+                        }
+
+                        //tableContents += '<td id="solvesTd">' + parseFloat(timeFormatter(ao5s[i])).toFixed(2) + '</td>';
+                        //tableContents += '<td id="solvesTd">' + parseFloat(timeFormatter(ao12s[i])).toFixed(2) + '</td></tr>';
+                    }
+
+                    document.write(tableContents);
+                </script>
+            </table>
         </div>
 
         <div id="rightBlock">
-            <div id="rightBlockFixed">
+            <div id="timerDiv">
                 <div id="timerElements">
-                    <h3 id="scramble" style="margin-top: -150px;"><script>/*document.write(scramblers["333"].getRandomScramble().scramble_string);*/</script></h3>
-                    <h1 id="timer">0.00</h1>
                     
+                    <h1 id="timer">0.00</h1>
+                    <span id="scramble"></span>
                     <script src="js/timer.js"></script>
                     <script src="js/main.js"></script>
                 </div>
+            </div>
+
+            <div id="discordButton">
+                <a target="_blank" href="https://discord.gg/UpN7pXf"><img src="img/Discord-Logo-White.PNG" height="64" width="64"></a>
             </div>
         </div>
     </div>
 
     <!--settings menu stuff below-->
     <div id="settingsMenu" class="modal">
-
         <!-- Modal content -->
         <div class="modal-content">
-          <div class="modal-header">
-            <span class="close">&times;</span>
-            <h3 style="text-align: left;">Settings</h3>
-          </div>
-          <div class="modal-body">
+            <div class="modal-body">
 
-            <p>Scramble type:
-            <select id="selectBoxScramble" onchange="changeScramble()">
-                <option value="222">2x2</option>
-                <option value="333" selected="selected">3x3</option>
-                <option value="444">4x4</option>
-                <option value="555">5x5</option>
-                <option value="666">6x6</option>
-                <option value="777">7x7</option>
-                <option value="333bf">3x3 BLD</option>
-            </select></p>
+            <!--settings table-->
+            <br>
+            <table>
+                <tr>
+                    <td style="padding: 2px; width: 75px;">Scramble:</td>
+                    <td style="padding: 2px;">
+                    <select id="selectBoxScramble" onchange="changeScramble()">
+                        <option value="222">2x2</option>
+                        <option value="333" selected="selected">3x3</option>
+                        <option value="444">4x4</option>
+                        <option value="555">5x5</option>
+                        <option value="666">6x6</option>
+                        <option value="777">7x7</option>
+                        <option value="333bf">3x3 BLD</option>
+                    </select>
+                    </td>
+                </tr>
 
-            <p>Theme:
-            <select id="selectBoxTheme" onchange="changeTheme()">
-                <option value="dark" selected="selected">Dark</option>
-            </select></p>
+                <tr>
+                    <td style="padding: 2px;">Theme:</td>
+                    <td style="padding: 2px;">
+                        <select id="selectBoxTheme" onchange="changeTheme()">
+                            <option value="default" selected="selected">Dark</option>
+                            <option value="light">Light</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <table>
+                <tr>
+                    <td style="padding: 2px;"><input type="checkbox" id="selectBoxTheme" checked disabled></td><td style="padding: 2px;"> Show time while solving?</td>
+                </tr>
+            </table>
 
-            <p><input type="checkbox" id="selectBoxTheme" checked disabled> Show time while solving?</p>
             <hr>
 
             <p>Controls:</p>
@@ -134,53 +239,35 @@
             <p><b>Last scramble:</b> Left arrow key</p>
             <p><b>Next scramble:</b> Right arrow key</p>
             <hr><br>
-            <a style="color: #FFF;" href="" onclick="localStorage.clear()">[Click here to clear all of your solves]</a>
+            <a id="clearLink" onclick="clearSolves()">[CLEAR SOLVES TABLE]</a>
             <br><br>
-            <p>If you'd like to request any features, please click the link below.</p>
-          </div>
-          <div class="modal-footer">
-                <h5>
-                    <a id="footerLink" target="_blank" href="http://twitter.com/treedot">contact</a>&nbsp;&nbsp;&nbsp;
-                    <a id="footerLink" target="_blank" href="https://github.com/Treedot/treedot.github.io/issues">feature requests</a>&nbsp;&nbsp;&nbsp;
-                    <a id="footerLink" target="_blank" href="todo.txt">to do list</a>
-                </h5>
-          </div>
+            <p>If you'd like to request any features or report bugs, join the Discord!<br><br><a id="clearLink" href="https://discord.gg/UpN7pXf">discord.gg/UpN7pXf</a></p>
+            <hr>
+            <p><a id="clearLink" target="_blank" href="todo.txt">> Upcoming features</a><br>
+            <a id="clearLink" target="_blank" href="knownbugs.txt">> Known bugs</a></p>
+            </div>
         </div>
-      
-      </div>
+        
+        </div>
 
-      <script>
-        var settingsOpen = false;
-
+        <script>
         // Get the modal
         var modal = document.getElementById('settingsMenu');
         
         // Get the button that opens the modal
-        var gearSymbol = document.getElementById("gearSymbol");
-        
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
+        var menuButton = document.getElementById("menuButton");
         
         // When the user clicks the button, open the modal 
-        gearSymbol.onclick = function() {
-            modal.style.display = "flex";
-            settingsOpen = true;
-        }
-        
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-            settingsOpen = false;
-        }
-        
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
+        menuButton.onclick = function() {
+            if (settingsOpen == true) {
                 settingsOpen = false;
+                modal.style.display = "none";
+            } else {
+                settingsOpen = true;
+                modal.style.display = "flex";
             }
         }
-        </script>
+    </script>
 </body>
 
 </html>
