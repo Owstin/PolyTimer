@@ -12,7 +12,7 @@ function toMS(str) {
     if(str.includes(":")) {
         const [mins, secms] = str.split(":");
         const sec = parseFloat(secms);
-        return ((+mins * 60) + sec) * 1000;
+        return (+mins * 60 + sec) * 1000;
     } else {
         return parseFloat(str) * 1000;
     }
@@ -61,14 +61,14 @@ if (localStorage.getItem("scrambleType") === null) {
     var scrambleType = JSON.parse(localStorage.getItem("scrambleType"));
 }
 
-if (scrambleType == "222") {var generatedScramble = scramblers["222"].getRandomScramble().scramble_string;}
-if (scrambleType == "333") {var generatedScramble = scramblers["333"].getRandomScramble().scramble_string;}
-if (scrambleType == "444") {var generatedScramble = scramblers["444"].getRandomScramble().scramble_string;}
-if (scrambleType == "555") {var generatedScramble = scramblers["555"].getRandomScramble().scramble_string;}
-if (scrambleType == "666") {var generatedScramble = scramblers["666"].getRandomScramble().scramble_string;}
-if (scrambleType == "777") {var generatedScramble = scramblers["777"].getRandomScramble().scramble_string;}
+if (scrambleType === "222") {var generatedScramble = scramblers["222"].getRandomScramble().scramble_string;}
+if (scrambleType === "333") {var generatedScramble = scramblers["333"].getRandomScramble().scramble_string;}
+if (scrambleType === "444") {var generatedScramble = scramblers["444"].getRandomScramble().scramble_string;}
+if (scrambleType === "555") {var generatedScramble = scramblers["555"].getRandomScramble().scramble_string;}
+if (scrambleType === "666") {var generatedScramble = scramblers["666"].getRandomScramble().scramble_string;}
+if (scrambleType === "777") {var generatedScramble = scramblers["777"].getRandomScramble().scramble_string;}
 
-if (scrambleType == "333bf") {var generatedScramble = scramblers["333bf"].getRandomScramble().scramble_string;}
+if (scrambleType === "333bf") {var generatedScramble = scramblers["333bf"].getRandomScramble().scramble_string;}
 
 scramble.textContent = generatedScramble;
 
@@ -79,19 +79,19 @@ var table = document.getElementById("solvesTable");
 
 //Stop the space bar from scrolling the page down
 window.onkeydown = function(e) { 
-    return !(e.keyCode == 32);
+    return !(e.keyCode === 32);
 };
 
 document.body.onkeyup = function(e) {
-    if (e.keyCode == 32) {
+    if (e.keyCode === 32) {
         if (watch.isOn) {
             watch.stop();
             
-            if (getActiveStyleSheet() == "default") {
+            if (getActiveStyleSheet() === "default") {
                 timer.style.color = 'white';
             }
 
-            if (getActiveStyleSheet() == "light") {
+            if (getActiveStyleSheet() === "light") {
                 timer.style.color = "black";
             }
 
@@ -197,22 +197,22 @@ document.body.onkeyup = function(e) {
         } else {
             watch.start();
 
-            if (getActiveStyleSheet() == "default") {
+            if (getActiveStyleSheet() === "default") {
                 timer.style.color = 'white';
             }
 
-            if (getActiveStyleSheet() == "light") {
+            if (getActiveStyleSheet() === "light") {
                 timer.style.color = "black";
             }
             
-            if (scrambleType == "222") {var generatedScramble = scramblers["222"].getRandomScramble().scramble_string;}
-            if (scrambleType == "333") {var generatedScramble = scramblers["333"].getRandomScramble().scramble_string;}
-            if (scrambleType == "444") {var generatedScramble = scramblers["444"].getRandomScramble().scramble_string;}
-            if (scrambleType == "555") {var generatedScramble = scramblers["555"].getRandomScramble().scramble_string;}
-            if (scrambleType == "666") {var generatedScramble = scramblers["666"].getRandomScramble().scramble_string;}
-            if (scrambleType == "777") {var generatedScramble = scramblers["777"].getRandomScramble().scramble_string;}
+            if (scrambleType === "222") {var generatedScramble = scramblers["222"].getRandomScramble().scramble_string;}
+            if (scrambleType === "333") {var generatedScramble = scramblers["333"].getRandomScramble().scramble_string;}
+            if (scrambleType === "444") {var generatedScramble = scramblers["444"].getRandomScramble().scramble_string;}
+            if (scrambleType === "555") {var generatedScramble = scramblers["555"].getRandomScramble().scramble_string;}
+            if (scrambleType === "666") {var generatedScramble = scramblers["666"].getRandomScramble().scramble_string;}
+            if (scrambleType === "777") {var generatedScramble = scramblers["777"].getRandomScramble().scramble_string;}
             
-            if (scrambleType == "333bf") {var generatedScramble = scramblers["333bf"].getRandomScramble().scramble_string;}
+            if (scrambleType === "333bf") {var generatedScramble = scramblers["333bf"].getRandomScramble().scramble_string;}
             
             scrambles.push(generatedScramble);
             scramble.textContent = generatedScramble;
@@ -223,7 +223,7 @@ document.body.onkeyup = function(e) {
 
 document.body.onkeydown = function(e) {
     //previous scramble (left arrow)
-    if (e.keyCode == 37 && scrambleIndex > 0) {
+    if (e.keyCode === 37 && scrambleIndex > 0) {
         if (!watch.isOn) {
             scrambleIndex -= 1;
             scramble.textContent = scrambles[scrambleIndex];
@@ -231,14 +231,14 @@ document.body.onkeydown = function(e) {
     }
 
     //next scramble (right arrow)
-    if (e.keyCode == 39 && scrambleIndex < scrambles.length-1) {
+    if (e.keyCode === 39 && scrambleIndex < scrambles.length-1) {
         if (!watch.isOn) {
             scrambleIndex += 1;
             scramble.textContent = scrambles[scrambleIndex];
         }
     }
 
-    if (e.keyCode == 32) {
+    if (e.keyCode === 32) {
         if (!watch.isOn) {
             watch.reset();
             timer.style.color = 'red';
@@ -247,11 +247,11 @@ document.body.onkeydown = function(e) {
         }
     }
 
-    if (e.keyCode == 8 && solves.length > 0) {
+    if (e.keyCode === 8 && solves.length > 0) {
         if (!watch.isOn) {
             var delConfirm = confirm("Delete last solve?");
 
-            if (delConfirm == true) {
+            if (delConfirm === true) {
                 solves.pop();
                 ao5s.pop();
                 ao12s.pop();
