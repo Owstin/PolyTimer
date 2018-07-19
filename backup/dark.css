@@ -1,0 +1,197 @@
+@font-face {
+    font-family: typewriter;
+    src: url(fonts/typewriter.otf);
+}
+
+@font-face {
+    font-family: digital;
+    src: url(fonts/digital.ttf);
+}
+
+@font-face {
+    font-family: roboto;
+    src: url(fonts/roboto.ttf);
+}
+
+body {
+    background-color: #000;
+    color: #FFF;
+
+    text-align: center;
+    margin-top: 200px;
+
+    font-family: "roboto";
+}
+
+#solvesTable {
+    width: 338px;
+    margin-top: -190px;
+    border: 2px solid #111;
+    border-collapse: collapse;
+    background-color: #222;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#solvesTd {
+    padding: 5px;
+    border: 2px solid #111;
+}
+
+#solvesTr {
+    background-color: #222;
+}
+
+#solvesTr:nth-child(even) {
+    background-color: #333;
+}
+
+#container {
+    width: 100%;
+}
+
+#leftBlock {
+    float: left;
+    height: 200px;
+    width: 25%;
+}
+
+#rightBlock {
+    float: right;
+    height: 200px;
+    width: 75%;
+}
+
+#rightBlockFixed {
+    position: fixed;
+    width: 75%;
+}
+
+#scramble {
+    word-spacing: 12px;
+    width: 95%;
+    margin: auto;
+}
+
+#timer {
+    font-family: "digital";
+    font-size: 175px;
+    font-weight: 300;
+    margin-top: 175px;
+}
+
+#footerLink {
+    text-decoration: none;
+    color: #444;
+}
+
+#footerLink:hover {
+    text-decoration: underline;
+    color: #666;
+}
+
+#version {
+    float: left;
+    color: #444;
+}
+
+#clearLink {
+    color: #FFF;
+}
+
+#logoBox {
+    padding: 10px;
+    padding-left: 15px;
+    font-size: 24px;
+    cursor: default;
+}
+
+#headerBox {
+    background-color: #222;
+}
+
+#gearSymbol {
+    font-family: Arial;
+    font-size: 24px;
+    font-weight: 900;
+    padding-right: 15px;
+    color: #444;
+}
+
+#gearSymbol:hover {
+    color: #FFF;
+    cursor: pointer;
+}
+
+/* The Modal (background) */
+.modal {
+    vertical-align: middle;
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    /*padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #333;
+    margin: auto;
+    padding: 0;
+    width: 60%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+    color: #444;
+    float: right;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #FFF;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #222;
+    color: white;
+}
+
+.modal-body {
+    padding: 2px 16px;
+    text-align: left;
+}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #222;
+    color: white;
+}

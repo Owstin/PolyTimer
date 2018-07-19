@@ -1,28 +1,43 @@
-These are things I'm going to be adding in the future
+These are things that will be added in the future, in no particular order
 
 scramble:
--next/last scramble buttons
--support for other cubes/puzzles
+-save scrambles with solves for later reference
 
 timer:
 -inspection times
 -hide time during solves
--start button options
+-start key options
 -hold for a few seconds to start
 
 solves table:
 -custom sorting (by number, best/worst times, etc)
--store solves locally between sessions
--import/export solves from database
+-import/export solves to and from database
 -create new sessions and store those
 -manually add solves
+-DNF and +2
 
 theme:
+-more preset themes
 -custom color selection
 -custom font selection
--background image support
+-background images
 
-random:
--settings/control menu
+misc:
 -connect to wca account
 -connect to stackmat
+-mobile site + controls
+-statistics (ao100, session average, etc)
+
+settings menu:
+-timer settings
+-visual settings
+-export settings
+
+other:
+-find a way to not have to reload when switching themes
+
+special thanks:
+Kleb
+Flowery Dragon
+Xetni14
+MelodicStream
