@@ -33,10 +33,7 @@ body, html {
     color: #FFF;
     width: 100%;
     height: 40px;
-<<<<<<< HEAD
     box-shadow: 0px 1px 10px #000;
-=======
->>>>>>> 131071b69adbcc96b07382582273b2bf9ede9015
 }
 
 #fillerBar {
@@ -44,24 +41,18 @@ body, html {
     height: 40px;
 }
 
-<<<<<<< HEAD
 #sessionSelect {
     float: right;
     margin-top: 10px;
     margin-right: 10px;
 }
 
-=======
->>>>>>> 131071b69adbcc96b07382582273b2bf9ede9015
 #leftBlock {
     background-color: #999;
     height: 100%;
     width: 20%;
     float: left;
-<<<<<<< HEAD
     box-shadow: 1px 0px 10px #000;
-=======
->>>>>>> 131071b69adbcc96b07382582273b2bf9ede9015
 }
 
 #solvesTable {

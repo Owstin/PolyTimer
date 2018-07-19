@@ -1,7 +1,3 @@
 -3x3 BLD scrambles are identical to 3x3 scrambles for some reason
-<<<<<<< HEAD
 -the discord button (bottom right) is not clickable while the menu is open
 -theme switching doesn't work in chrome
-=======
--the discord button (bottom right) is not clickable while the menu is open
->>>>>>> 131071b69adbcc96b07382582273b2bf9ede9015
