@@ -4,6 +4,7 @@ var scramble = document.getElementById('scramble');
 
 var watch = new Timer(timer);
 var ready = false;
+<<<<<<< HEAD
 
 var settingsOpen = false;
 
@@ -18,6 +19,22 @@ function toMS(str) {
     }
 }
 
+=======
+
+var settingsOpen = false;
+
+//Converts the timer.js output strings into milliseconds for math purposes
+function toMS(str) {
+    if(str.includes(":")) {
+        const [mins, secms] = str.split(":");
+        const sec = parseFloat(secms);
+        return ((+mins * 60) + sec) * 1000;
+    } else {
+        return parseFloat(str) * 1000;
+    }
+}
+
+>>>>>>> 131071b69adbcc96b07382582273b2bf9ede9015
 function timeFormatter(s) {
     var ms = s % 1000;
     s = (s - ms) / 1000;
@@ -32,21 +49,34 @@ function timeFormatter(s) {
 
     } else {
         if (mins > 0) {
+<<<<<<< HEAD
             if (secs < 10) {
                 if (ms < 10) {
+=======
+            if (secs < 9) {
+                if (ms < 9) {
+>>>>>>> 131071b69adbcc96b07382582273b2bf9ede9015
                     return mins + ':0' + secs + '.0' + ms;
                 } else {
                     return mins + ':0' + secs + '.' + ms;
                 }
             } else {
+<<<<<<< HEAD
                 if (ms < 10) {
+=======
+                if (ms < 9) {
+>>>>>>> 131071b69adbcc96b07382582273b2bf9ede9015
                     return mins + ':' + secs + '.0' + ms;
                 } else {
                     return mins + ':' + secs + '.' + ms;
                 }
             }
         } else {
+<<<<<<< HEAD
             if (ms < 10) {
+=======
+            if (ms < 9) {
+>>>>>>> 131071b69adbcc96b07382582273b2bf9ede9015
                 return secs + '.0' + ms;
             } else {
                 return secs + '.' + ms;
@@ -152,6 +182,7 @@ document.body.onkeyup = function(e) {
             } else ao12 = 0.00;
 
             col1.innerHTML = solves.length;
+<<<<<<< HEAD
             //col2.innerHTML = parseFloat(timeFormatter(msTime)).toFixed(2);
             //col3.innerHTML = parseFloat(timeFormatter(ao5)).toFixed(2);
             //col4.innerHTML = parseFloat(timeFormatter(ao12)).toFixed(2);
@@ -185,6 +216,13 @@ document.body.onkeyup = function(e) {
             } else {
                 col4.innerHTML = ao12Floated;
             }
+=======
+            col2.innerHTML = parseFloat(timeFormatter(msTime)).toFixed(2);
+            col3.innerHTML = parseFloat(timeFormatter(ao5)).toFixed(2);
+            col4.innerHTML = parseFloat(timeFormatter(ao12)).toFixed(2);
+
+            console.log(solves);
+>>>>>>> 131071b69adbcc96b07382582273b2bf9ede9015
 
             ao5s.push(ao5);
             ao12s.push(ao12);

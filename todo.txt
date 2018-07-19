@@ -28,16 +28,23 @@ misc:
 -mobile site + controls
 -statistics (ao100, session average, etc)
 
+<<<<<<< HEAD
 settings menu:
 -timer settings
 -visual settings
 -export settings
 
+=======
+>>>>>>> 131071b69adbcc96b07382582273b2bf9ede9015
 other:
 -find a way to not have to reload when switching themes
 
 special thanks:
 Kleb
 Flowery Dragon
+<<<<<<< HEAD
 Xetni14
 MelodicStream
+=======
+Xetni14
+>>>>>>> 131071b69adbcc96b07382582273b2bf9ede9015
