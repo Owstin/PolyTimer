@@ -78,21 +78,21 @@
 
             } else {
                 if (mins > 0) {
-                    if (secs < 9) {
-                        if (ms < 9) {
+                    if (secs < 10) {
+                        if (ms < 10) {
                             return mins + ':0' + secs + '.0' + ms;
                         } else {
                             return mins + ':0' + secs + '.' + ms;
                         }
                     } else {
-                        if (ms < 9) {
+                        if (ms < 10) {
                             return mins + ':' + secs + '.0' + ms;
                         } else {
                             return mins + ':' + secs + '.' + ms;
                         }
                     }
                 } else {
-                    if (ms < 9) {
+                    if (ms < 10) {
                         return secs + '.0' + ms;
                     } else {
                         return secs + '.' + ms;
@@ -108,6 +108,10 @@
         <div id="topBar">
             <span id="menuButton">&#9776;</span>
             <span id="logoText">PolyTimer</span>
+            <!--<select id="sessionSelect">
+                <option value="session1">Session 1</option>
+                <option value="newsesh">New Session</option>
+            </select>-->
         </div>
         <div id="fillerBar"></div>
         <div id="leftBlock">

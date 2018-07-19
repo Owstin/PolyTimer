@@ -28,6 +28,11 @@ misc:
 -mobile site + controls
 -statistics (ao100, session average, etc)
 
+settings menu:
+-timer settings
+-visual settings
+-export settings
+
 other:
 -find a way to not have to reload when switching themes
 
@@ -35,3 +40,4 @@ special thanks:
 Kleb
 Flowery Dragon
 Xetni14
+MelodicStream
