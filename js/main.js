@@ -97,7 +97,11 @@ document.body.onkeyup = function(e) {
 
             var msTime = toMS(formattedTime);
             var fixedTime = timeFormatter(msTime);
+
+            //push time to solves array, then update solves array in sessions array, then store the sessions array
             solves.push(msTime);
+            sessions.splice(currentSession, 1, solves);
+            localStorage.setItem("sessions", JSON.stringify(sessions));
 
             var row = table.insertRow(1);
             var col1 = row.insertCell(0);

@@ -22,10 +22,9 @@
     <script src="jsss-master/scramble_sq1.js"></script>
     <script src="jsss-master/scramble_clock.js"></script>
 
-    <!--scramble changer-->
     <script>
         function clearSolves() {
-            if (confirm("Really clear all of your solves?") == true) {
+            if (confirm("Really delete all of your saved data?") == true) {
                 localStorage.clear();
                 window.location.reload(true);
             }
@@ -44,6 +43,36 @@
             } else {
                 selectBox.value = JSON.parse(localStorage.getItem("scrambleType"));
             }
+        }
+
+        function updateSession() {
+            var selectBox = document.getElementById("sessionSelect");
+            
+            if (currentSession > 1 && !selectBox.options[currentSession]) {
+                selectBox.add(new Option('Session ' + currentSession, currentSession));
+            }
+
+            if (localStorage.getItem("currentSession") === null) {
+                selectBox.value = "1";
+            } else {
+                selectBox.value = JSON.parse(localStorage.getItem("currentSession"));
+            }
+        }
+
+        function changeSession() {
+            var selectBox = document.getElementById("sessionSelect");
+
+            if (selectBox.value == "new") {
+                sessions.push();
+                currentSession = sessions.length;
+            } else {
+                currentSession = Number(selectBox.value);
+            }
+            
+            localStorage.setItem("sessions", JSON.stringify(sessions));
+            localStorage.setItem("currentSession", JSON.stringify(currentSession));
+
+            window.location.reload(true);
         }
 
         function changeTheme() {
@@ -102,15 +131,11 @@
     </script>
 </head>
 
-<body onload="updateScrambleBox(); updateThemeBox();">
+<body onload="updateScrambleBox(); updateThemeBox(); updateSession();">
     <div id="container">
         <div id="topBar">
             <span id="menuButton">&#9776;</span>
-            <span id="logoText">PolyTimer</span>
-            <!--<select id="sessionSelect">
-                <option value="session1">Session 1</option>
-                <option value="newsesh">New Session</option>
-            </select>-->
+            <span id="logoText">PolyTimer</span><span style="font-size: 10pt;">&nbsp;&nbsp;Beta</span>
         </div>
         <div id="fillerBar"></div>
         <div id="leftBlock">
@@ -122,16 +147,37 @@
                     <td id="solvesTd">ao12</td>
                 </tr>
                 <script>
+                    //Open the session that was last used if it exists
+                    if (localStorage.getItem("currentSession") === null) {
+                        currentSession = "1";
+                    } else {
+                        currentSession = JSON.parse(localStorage.getItem("currentSession"));
+                    }
+
+                    //update the sessions array if it's in local storage
+                    if (localStorage.getItem("sessions") === null) {
+                        var sessions = [solves];
+                        sessions.push("blank");
+                    } else {
+                        var sessions = JSON.parse(localStorage.getItem("sessions"));
+                    }
+
+                    //update the solves/ao5s/ao12s arrays if they're in local storage
                     if (localStorage.getItem("solves") === null) {
                         var solves = [];
                         var ao5s = [];
                         var ao12s = [];
                     } else {
-                        var solves = JSON.parse(localStorage.getItem("solves"));
+                        //var solves = JSON.parse(localStorage.getItem("solves"));
+                        if (sessions[currentSession]) {
+                            var solves = sessions[currentSession];
+                        } else {
+                            var solves = [];
+                        }
                         var ao5s = JSON.parse(localStorage.getItem("ao5s"));
                         var ao12s = JSON.parse(localStorage.getItem("ao12s"));
                     }
-
+                    
                     var tableContents = '';
 
                     for (i = solves.length; i--;) {
@@ -162,13 +208,10 @@
 
                         //ao12
                         if (ao12Formatted.includes(":")) {
-                            tableContents += '<td id="solvesTd">' + ao12Formatted + '</td>';
+                            tableContents += '<td id="solvesTd">' + ao12Formatted + '</td></tr>';
                         } else {
-                            tableContents += '<td id="solvesTd">' + ao12Floated + '</td>';
+                            tableContents += '<td id="solvesTd">' + ao12Floated + '</td></tr>';
                         }
-
-                        //tableContents += '<td id="solvesTd">' + parseFloat(timeFormatter(ao5s[i])).toFixed(2) + '</td>';
-                        //tableContents += '<td id="solvesTd">' + parseFloat(timeFormatter(ao12s[i])).toFixed(2) + '</td></tr>';
                     }
 
                     document.write(tableContents);
@@ -202,6 +245,27 @@
             <!--settings table-->
             <br>
             <table>
+                <tr>
+                    <td style="padding: 2px">Session: </td>
+                    <td style="padding: 2px">
+                    <select id="sessionSelect" onchange="changeSession()">
+                        <option value="new">New Session</option>
+                        <script>
+                        var options = '';
+        
+                        for (var i = 0; i < sessions.length-1; i++) {
+                            var index = sessions[i+1];
+        
+                            if (index !== "deleted") {
+                                options += '<option value=\"' + (i+1) + '\">Session ' + (i+1) + '</option>';
+                            }
+                        }
+        
+                        document.write(options);
+                        </script>
+                    </select>
+                    </td>
+                </tr>
                 <tr>
                     <td style="padding: 2px; width: 75px;">Scramble:</td>
                     <td style="padding: 2px;">
@@ -242,7 +306,9 @@
             <p><b>Last scramble:</b> Left arrow key</p>
             <p><b>Next scramble:</b> Right arrow key</p>
             <hr><br>
-            <a id="clearLink" onclick="clearSolves()">[CLEAR SOLVES TABLE]</a>
+            <!--<a id="clearLink" onclick="deleteSession()">[DELETE CURRENT SESSION]</a>
+            <br><br>-->
+            <a id="clearLink" onclick="clearSolves()">[CLEAR ALL SAVED DATA]</a>
             <br><br>
             <p>If you'd like to request any features or report bugs, join the Discord!<br><br><a id="clearLink" href="https://discord.gg/UpN7pXf">discord.gg/UpN7pXf</a></p>
             <hr>

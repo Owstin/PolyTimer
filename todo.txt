@@ -12,9 +12,9 @@ timer:
 solves table:
 -custom sorting (by number, best/worst times, etc)
 -import/export solves to and from database
--create new sessions and store those
 -manually add solves
 -DNF and +2
+-fix sessions system
 
 theme:
 -more preset themes
@@ -23,10 +23,12 @@ theme:
 -background images
 
 misc:
+-graph to display statistics
 -connect to wca account
 -connect to stackmat
 -mobile site + controls
 -statistics (ao100, session average, etc)
+-versus mode a la twist the web
 
 settings menu:
 -timer settings

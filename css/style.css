@@ -40,12 +40,6 @@ body, html {
     height: 40px;
 }
 
-#sessionSelect {
-    float: right;
-    margin-top: 10px;
-    margin-right: 10px;
-}
-
 #leftBlock {
     background-color: #444;
     height: 100%;
