@@ -39,7 +39,8 @@ other:
 -find a way to not have to reload when switching themes
 
 special thanks:
+Rouxles
 Kleb
 Flowery Dragon
 Xetni14
-MelodicStream
+Cubing_Cuber

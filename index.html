@@ -240,84 +240,104 @@
     <div id="settingsMenu" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
-            <div class="modal-body">
 
-            <!--settings table-->
-            <br>
-            <table>
-                <tr>
-                    <td style="padding: 2px">Session: </td>
-                    <td style="padding: 2px">
-                    <select id="sessionSelect" onchange="changeSession()">
-                        <option value="new">New Session</option>
-                        <script>
-                        var options = '';
-        
-                        for (var i = 0; i < sessions.length-1; i++) {
-                            var index = sessions[i+1];
-        
-                            if (index !== "deleted") {
-                                options += '<option value=\"' + (i+1) + '\">Session ' + (i+1) + '</option>';
-                            }
-                        }
-        
-                        document.write(options);
-                        </script>
-                    </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="padding: 2px; width: 75px;">Scramble:</td>
-                    <td style="padding: 2px;">
-                    <select id="selectBoxScramble" onchange="changeScramble()">
-                        <option value="222">2x2</option>
-                        <option value="333" selected="selected">3x3</option>
-                        <option value="444">4x4</option>
-                        <option value="555">5x5</option>
-                        <option value="666">6x6</option>
-                        <option value="777">7x7</option>
-                        <option value="333bf">3x3 BLD</option>
-                    </select>
-                    </td>
-                </tr>
+            <button class="collapsible">Timer / Sessions</button>
+            <div class="collapseContent">
+                <div class="modal-body">
+                    <br>
+                    <table>
+                        <tr>
+                            <td style="padding: 2px">Session: </td>
+                            <td style="padding: 2px">
+                            <select id="sessionSelect" onchange="changeSession()">
+                                <option value="new">New Session</option>
+                                <script>
+                                var options = '';
+                
+                                for (var i = 0; i < sessions.length-1; i++) {
+                                    var index = sessions[i+1];
+                
+                                    if (index !== "deleted") {
+                                        options += '<option value=\"' + (i+1) + '\">Session ' + (i+1) + '</option>';
+                                    }
+                                }
+                
+                                document.write(options);
+                                </script>
+                            </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 2px; width: 75px;">Scramble:</td>
+                            <td style="padding: 2px;">
+                            <select id="selectBoxScramble" onchange="changeScramble()">
+                                <option value="222">2x2</option>
+                                <option value="333" selected="selected">3x3</option>
+                                <option value="444">4x4</option>
+                                <option value="555">5x5</option>
+                                <option value="666">6x6</option>
+                                <option value="777">7x7</option>
+                                <option value="333bf">3x3 BLD</option>
+                            </select>
+                            </td>
+                        </tr>
+                    </table>
+                    <div style="padding: 2px;">
+                        <p>Controls:</p>
+                        <p><b>Start/Stop the timer:</b> Space bar</p>
+                        <p><b>Delete the last solve:</b> Backspace</p>
+                        <p><b>Last scramble:</b> Left arrow key</p>
+                        <p><b>Next scramble:</b> Right arrow key</p>
+                    <br>
+                    <a id="clearLink" onclick="clearSolves()">[CLEAR ALL SAVED DATA]</a>
+                    </div>
+                    <br>
+                </div>
+            </div>
 
-                <tr>
-                    <td style="padding: 2px;">Theme:</td>
-                    <td style="padding: 2px;">
-                        <select id="selectBoxTheme" onchange="changeTheme()">
-                            <option value="default" selected="selected">Dark</option>
-                            <option value="light">Light</option>
-                        </select>
-                    </td>
-                </tr>
-            </table>
-            <br>
-            <table>
-                <tr>
-                    <td style="padding: 2px;"><input type="checkbox" id="selectBoxTheme" checked disabled></td><td style="padding: 2px;"> Show time while solving?</td>
-                </tr>
-            </table>
+            <button class="collapsible">Look & Feel</button>
+            <div class="collapseContent">
+                <div class="modal-body">
+                    <br><table>
+                        <tr>
+                            <td style="padding: 2px; width: 75px;">Theme:</td>
+                            <td style="padding: 2px;">
+                                <select id="selectBoxTheme" onchange="changeTheme()">
+                                    <option value="default" selected="selected">Dark</option>
+                                    <option value="light">Light</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td style="padding: 2px;"><input type="checkbox" id="selectBoxTheme" checked disabled></td><td style="padding: 2px;"> Show time while solving?</td>
+                        </tr>
+                    </table><br>
+                </div>
+            </div>
 
-            <hr>
-
-            <p>Controls:</p>
-            <p><b>Start/Stop the timer:</b> Space bar</p>
-            <p><b>Delete the last solve:</b> Backspace</p>
-            <p><b>Last scramble:</b> Left arrow key</p>
-            <p><b>Next scramble:</b> Right arrow key</p>
-            <hr><br>
-            <!--<a id="clearLink" onclick="deleteSession()">[DELETE CURRENT SESSION]</a>
-            <br><br>-->
-            <a id="clearLink" onclick="clearSolves()">[CLEAR ALL SAVED DATA]</a>
-            <br><br>
-            <p>If you'd like to request any features or report bugs, join the Discord!<br><br><a id="clearLink" href="https://discord.gg/UpN7pXf">discord.gg/UpN7pXf</a></p>
-            <hr>
-            <p><a id="clearLink" target="_blank" href="todo.txt">> Upcoming features</a><br>
-            <a id="clearLink" target="_blank" href="knownbugs.txt">> Known bugs</a></p>
+            <button class="collapsible">Extras</button>
+            <div class="collapseContent">
+                <div class="modal-body">
+                    <p>If you'd like to request any features or report bugs, join the Discord!<br><br><a id="clearLink" href="https://discord.gg/UpN7pXf">discord.gg/UpN7pXf</a></p>
+                    <hr>
+                    <p><a id="clearLink" target="_blank" href="todo.txt">> Upcoming features</a><br>
+                    <a id="clearLink" target="_blank" href="knownbugs.txt">> Known bugs</a></p>
+                    <hr>
+                    <table>
+                        <tr style="font-weight: bold;"><td>Special thanks to...</td></tr>
+                        <tr><td>Rouxles</td></tr>
+                        <tr><td>Kleb</td></tr>
+                        <tr><td>Flowery Dragon</td></tr>
+                        <tr><td>Xetni14</td></tr>
+                        <tr><td>Cubing_Cuber</td></tr>
+                        <tr><td>Niccbudd</td></tr>
+                    </table>
+                </div>
             </div>
         </div>
-        
-        </div>
+    </div>
 
         <script>
         // Get the modal
@@ -335,6 +355,23 @@
                 settingsOpen = true;
                 modal.style.display = "flex";
             }
+        }
+    </script>
+
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.maxHeight){
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+            });
         }
     </script>
 </body>
