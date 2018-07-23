@@ -25,6 +25,14 @@
     <script src="jsss-master/scramble_clock.js"></script>
 
     <script>
+        function updateSettings() {
+            //show time during solves
+            if (localStorage.getItem("showTime") == null) {showTime = true;} else {showTime = JSON.parse(localStorage.getItem("showTime"));}
+            document.getElementById("checkBoxHideShowTime").checked == showTime;
+        }
+
+        function hideShowTime() {if (showTime == true) {showTime = false;} else {showTime = true;} localStorage.setItem("showTime", JSON.stringify(showTime));}
+
         function clearSolves() {
             if (confirm("Really delete all of your saved data?") == true) {
                 localStorage.clear();
@@ -133,7 +141,7 @@
     </script>
 </head>
 
-<body onload="updateScrambleBox(); updateThemeBox(); updateSession();">
+<body onload="updateScrambleBox(); updateThemeBox(); updateSession(); updateSettings();">
     <div id="container">
         <div id="topBar">
             <span id="menuButton">&#9776;</span>
@@ -316,7 +324,7 @@
                     </table>
                     <table>
                         <tr>
-                            <td style="padding: 2px;"><input type="checkbox" id="selectBoxTheme" checked disabled></td><td style="padding: 2px;"> Show time while solving?</td>
+                            <td style="padding: 2px;"><input type="checkbox" id="checkBoxHideShowTime" onclick="hideShowTime();" checked></td><td style="padding: 2px;"> Show time while solving?</td>
                         </tr>
                     </table><br>
                 </div>
@@ -336,7 +344,7 @@
                         <tr><td>Kleb</td></tr>
                         <tr><td>Flowery Dragon</td></tr>
                         <tr><td>Xetni14</td></tr>
-                        <tr><td>Cubing_Cuber</td></tr>
+                        <tr><td>Enay guy</td></tr>
                         <tr><td>Niccbudd</td></tr>
                     </table>
                 </div>

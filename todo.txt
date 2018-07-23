@@ -5,7 +5,6 @@ scramble:
 
 timer:
 -inspection times
--hide time during solves
 -start key options
 -hold for a few seconds to start
 

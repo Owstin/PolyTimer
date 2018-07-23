@@ -11,7 +11,8 @@ function Timer(elem) {
         }
 
         formattedTime = timeFormatter(time);
-        elem.textContent = formattedTime;
+
+        if (showTime == true) {elem.textContent = formattedTime;}
     }
 
     function delta() {
@@ -50,6 +51,8 @@ function Timer(elem) {
             interval = setInterval(update.bind(this), 10);
             offset = Date.now();
             this.isOn = true;
+
+            if (showTime == false) {elem.textContent = "SOLVE";}
         }
     };
 
@@ -58,6 +61,8 @@ function Timer(elem) {
             clearInterval(interval);
             interval = null;
             this.isOn = false;
+
+            elem.textContent = formattedTime;
         }
     };
 
