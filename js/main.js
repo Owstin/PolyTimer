@@ -264,6 +264,8 @@ document.body.onkeydown = function(e) {
                 var row = table.deleteRow(1);
                 timer.textContent = "0.00";
 
+                localStorage.setItem("sessions", JSON.stringify(sessions));
+
                 localStorage.setItem("solves", JSON.stringify(solves));
                 localStorage.setItem("ao5s", JSON.stringify(ao5s));
                 localStorage.setItem("ao12s", JSON.stringify(ao12s));
