@@ -30,10 +30,9 @@ misc:
 -statistics (ao100, session average, etc)
 -versus mode a la twist the web
 
-settings menu:
--timer settings
--visual settings
--export settings
+sessions:
+-creating/deleting
+-renaming
 
 other:
 -find a way to not have to reload when switching themes
