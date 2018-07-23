@@ -91,7 +91,7 @@ document.body.onkeyup = function(e) {
                 timer.style.color = 'white';
             }
 
-            if (getActiveStyleSheet() === "light") {
+            if (getActiveStyleSheet() === "light" || getActiveStyleSheet() == "ocean" || getActiveStyleSheet() == "ccff00") {
                 timer.style.color = "black";
             }
 
@@ -205,9 +205,10 @@ document.body.onkeyup = function(e) {
                 timer.style.color = 'white';
             }
 
-            if (getActiveStyleSheet() === "light") {
+            if (getActiveStyleSheet() === "light" || getActiveStyleSheet() == "ocean" || getActiveStyleSheet() == "ccff00") {
                 timer.style.color = "black";
             }
+
             
             if (scrambleType === "222") {var generatedScramble = scramblers["222"].getRandomScramble().scramble_string;}
             if (scrambleType === "333") {var generatedScramble = scramblers["333"].getRandomScramble().scramble_string;}
