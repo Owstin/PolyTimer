@@ -1,5 +1,10 @@
 These are things that will be added in the future, in no particular order
 
+CURRENT TASKS:
+-make sessions better
+-more detailed statistics
+-draw scrambles
+
 scramble:
 -save scrambles with solves for later reference
 
@@ -14,6 +19,8 @@ solves table:
 -manually add solves
 -DNF and +2
 -fix sessions system
+-manually add move count
+-add notes about solves
 
 theme:
 -more preset themes
@@ -33,6 +40,10 @@ sessions:
 -creating/deleting
 -renaming
 
+statistics:
+-giant background graph
+-average move count
+
 other:
 -find a way to not have to reload when switching themes
 
@@ -42,3 +53,4 @@ Kleb
 Flowery Dragon
 Xetni14
 Cubing_Cuber
+Owstin
