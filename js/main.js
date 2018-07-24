@@ -125,7 +125,7 @@ document.body.onkeyup = function(e) {
 document.body.onkeydown = function(e) {
     if (watch.isOn()) {
         watch.stop();
-            
+        
         if (getActiveStyleSheet() === "default") {
             timer.style.color = 'white';
         }
