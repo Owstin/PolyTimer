@@ -204,7 +204,7 @@ document.body.onkeyup = function(e) {
             localStorage.setItem("scrambleType", JSON.stringify(scrambleType));
 
             updateStatistics();
-            
+
         } else {
             watch.start();
 
@@ -280,6 +280,8 @@ document.body.onkeydown = function(e) {
                 localStorage.setItem("solves", JSON.stringify(solves));
                 localStorage.setItem("ao5s", JSON.stringify(ao5s));
                 localStorage.setItem("ao12s", JSON.stringify(ao12s));
+
+                updateStatistics();
             }
         }
     }
