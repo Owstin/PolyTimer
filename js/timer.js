@@ -6,7 +6,7 @@ function Timer(elem) {
     var offset;
 
     function update() {
-        if (this.isOn && this.isOn()) {
+        if (this.isOn) {
             time += delta();
         }
 
@@ -44,26 +44,23 @@ function Timer(elem) {
         }
     }
 
-    // 0: ready, 1: timing, 2: stopped
-    this.timerState = 0;
-    this.isOn = function () { return this.timerState === 1; }
-    this.isStopped = function () { return this.timerState === 2; }
+    this.isOn = false;
 
     this.start = function() {
-        if (!this.isOn()) {
+        if (!this.isOn) {
             interval = setInterval(update.bind(this), 10);
             offset = Date.now();
-            this.timerState++;
+            this.isOn = true;
 
             if (showTime == false) {elem.textContent = "SOLVE";}
         }
     };
 
     this.stop = function() {
-        if (this.isOn()) {
+        if (this.isOn) {
             clearInterval(interval);
             interval = null;
-            this.timerState++;
+            this.isOn = false;
 
             elem.textContent = formattedTime;
         }
@@ -73,8 +70,4 @@ function Timer(elem) {
         time = 0;
         update();
     };
-
-    this.ready = function () {
-        this.timerState = 0;
-    }
 }

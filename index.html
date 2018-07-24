@@ -11,6 +11,7 @@
     <link rel="alternate stylesheet" type="text/css" href="css/ocean.css" title="ocean">
     <link rel="alternate stylesheet" type="text/css" href="css/ccff00.css" title="ccff00">
 
+    <!--stylesheet switcher-->
     <script type="text/javascript" src="js/styleswitcher.js"></script>
 
     <!--standard scrambles-->
@@ -24,124 +25,11 @@
     <script src="jsss-master/scramble_sq1.js"></script>
     <script src="jsss-master/scramble_clock.js"></script>
 
-    <script>
-        function updateSettings() {
-            //show time during solves
-            if (localStorage.getItem("showTime") == null) {showTime = true;} else {showTime = JSON.parse(localStorage.getItem("showTime"));}
-            document.getElementById("checkBoxHideShowTime").checked == showTime;
-        }
-
-        function hideShowTime() {if (showTime == true) {showTime = false;} else {showTime = true;} localStorage.setItem("showTime", JSON.stringify(showTime));}
-
-        function clearSolves() {
-            if (confirm("Really delete all of your saved data?") == true) {
-                localStorage.clear();
-                window.location.reload(true);
-            }
-        }
-
-        function updateThemeBox() {
-            var selectBox = document.getElementById("selectBoxTheme");
-            selectBox.value = getActiveStyleSheet();
-        }
-
-        function updateScrambleBox() {
-            var selectBox = document.getElementById("selectBoxScramble");
-
-            if (localStorage.getItem("scrambleType") === null) {
-                selectBox.value = "333";
-            } else {
-                selectBox.value = JSON.parse(localStorage.getItem("scrambleType"));
-            }
-        }
-
-        function updateSession() {
-            var selectBox = document.getElementById("sessionSelect");
-            
-            if (currentSession > 1 && !selectBox.options[currentSession]) {
-                selectBox.add(new Option('Session ' + currentSession, currentSession));
-            }
-
-            if (localStorage.getItem("currentSession") === null) {
-                selectBox.value = "1";
-            } else {
-                selectBox.value = JSON.parse(localStorage.getItem("currentSession"));
-            }
-        }
-
-        function changeSession() {
-            var selectBox = document.getElementById("sessionSelect");
-
-            if (selectBox.value == "new") {
-                sessions.push();
-                currentSession = sessions.length;
-            } else {
-                currentSession = Number(selectBox.value);
-            }
-            
-            localStorage.setItem("sessions", JSON.stringify(sessions));
-            localStorage.setItem("currentSession", JSON.stringify(currentSession));
-
-            window.location.reload(true);
-        }
-
-        function changeTheme() {
-            var selectBox = document.getElementById("selectBoxTheme");
-            var theme = selectBox.value;
-
-            setActiveStyleSheet(theme);
-            window.location.reload(true);
-        }
-
-        function changeScramble() {
-            var selectBox = document.getElementById("selectBoxScramble");
-            var selectedVal = selectBox.options[selectBox.selectedIndex].value;
-
-            scrambleType = selectedVal;
-            localStorage.setItem("scrambleType", JSON.stringify(scrambleType));
-            window.location.reload(true);
-        }
-
-        function timeFormatter(s) {
-            var ms = s % 1000;
-            s = (s - ms) / 1000;
-            var secs = s % 60;
-            s = (s - secs) / 60;
-            var mins = s % 60;
-            var hrs = (s - mins) / 60;
-
-            ms = Math.round(ms/10);
-
-            if (hrs > 0) {
-
-            } else {
-                if (mins > 0) {
-                    if (secs < 10) {
-                        if (ms < 10) {
-                            return mins + ':0' + secs + '.0' + ms;
-                        } else {
-                            return mins + ':0' + secs + '.' + ms;
-                        }
-                    } else {
-                        if (ms < 10) {
-                            return mins + ':' + secs + '.0' + ms;
-                        } else {
-                            return mins + ':' + secs + '.' + ms;
-                        }
-                    }
-                } else {
-                    if (ms < 10) {
-                        return secs + '.0' + ms;
-                    } else {
-                        return secs + '.' + ms;
-                    }
-                }
-            }
-        }
-    </script>
+    <!--function dump-->
+    <script type="text/javascript" src="js/functions.js"></script>
 </head>
 
-<body onload="updateScrambleBox(); updateThemeBox(); updateSession(); updateSettings();">
+<body onload="updateScrambleBox(); updateThemeBox(); updateSession(); updateSettings(); updateStatistics();">
     <div id="container">
         <div id="topBar">
             <span id="menuButton">&#9776;</span>
@@ -233,7 +121,6 @@
         <div id="rightBlock">
             <div id="timerDiv">
                 <div id="timerElements">
-                    
                     <h1 id="timer">0.00</h1>
                     <span id="scramble"></span>
                     <script src="js/timer.js"></script>
@@ -251,6 +138,56 @@
     <div id="settingsMenu" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
+
+            <button class="collapsible active">Statistics</button>
+            <div class="collapseContent" style="max-height: 310px;">
+                <div class="modal-body"><br>
+                    <table style="width: 100%;">
+                        <tr>
+                            <td style="width: 150px;">Session average:</td>
+                            <td style="text-align: right;"><span id="statsSessionAverage">0.00</span></td>
+                        </tr>
+                        <tr>
+                            <td>Session mean:</td>
+                            <td style="text-align: right;" id="statsSessionMean">0.00</td>
+                        </tr>
+
+                        <tr><td>&nbsp;</td></tr>
+
+                        <tr>
+                            <td>Best single:</td>
+                            <td style="text-align: right;" id="statsBestSingle">0.00</td>
+                        </tr>
+                        <tr>
+                            <td>Best Ao5:</td>
+                            <td style="text-align: right;" id="statsBestAo5">0.00</td>
+                        </tr>
+                        <tr>
+                            <td>Best Ao12:</td>
+                            <td style="text-align: right;" id="statsBestAo12">0.00</td>
+                        </tr>
+
+                        <tr><td>&nbsp;</td></tr>
+
+                        <tr>
+                            <td>Current Ao5:</td>
+                            <td style="text-align: right;" id="statsAverageOf5">0.00</td>
+                        </tr>
+                        <tr>
+                            <td>Current Ao12:</td>
+                            <td style="text-align: right;" id="statsAverageOf12">0.00</td>
+                        </tr>
+                        <tr>
+                            <td>Current Ao100:</td>
+                            <td style="text-align: right;" id="statsAverageOf100">0.00</td>
+                        </tr>
+                        <tr>
+                            <td>Current Ao1000:</td>
+                            <td style="text-align: right;" id="statsAverageOf1000">0.00</td>
+                        </tr>
+                    </table>
+                <br></div>
+            </div>
 
             <button class="collapsible">Timer / Sessions</button>
             <div class="collapseContent">
@@ -289,6 +226,10 @@
                                 <option value="666">6x6</option>
                                 <option value="777">7x7</option>
                                 <option value="333bf">3x3 BLD</option>
+                                <option value="minx">Megaminx</option>
+                                <option value="pyram">Pyraminx</option>
+                                <option value="sq1">Square-1</option>
+                                <option value="clock">Clock</option>
                             </select>
                             </td>
                         </tr>
@@ -346,7 +287,8 @@
                         <tr><td>Xetni14</td></tr>
                         <tr><td>Enay guy</td></tr>
                         <tr><td>Niccbudd</td></tr>
-                    </table>
+                        <tr><td>Owstin</td></tr>
+                    </table><br><br>
                 </div>
             </div>
         </div>

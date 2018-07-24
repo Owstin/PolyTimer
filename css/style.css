@@ -47,6 +47,14 @@ body, html {
 
 #leftBlock {
     background-color: #444;
+    padding-bottom: 4px;
+    height: 100%;
+    width: 20%;
+    float: left;
+}
+
+#leftBlockShadow {
+    position: fixed;
     height: 100%;
     width: 20%;
     float: left;

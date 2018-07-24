@@ -43,6 +43,7 @@ body, html {
 
 #leftBlock {
     background-color: #5fc9cb;
+    padding-bottom: 4px;
     height: 100%;
     width: 20%;
     float: left;
