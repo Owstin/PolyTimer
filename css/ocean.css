@@ -172,6 +172,7 @@ body, html {
     background-color: #5fc9cb;
     padding: 0;
     width: 20%;
+    overflow: auto;
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.5s;
     animation-name: animatetop;
