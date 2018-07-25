@@ -133,6 +133,15 @@ body, html {
     margin: auto;
 }
 
+#scrambleDiv {
+    display: none;
+    position: fixed;
+    top: 50px;
+    right: 40px;
+    z-index: 9;
+    text-align: center;
+}
+
 #timer {
     font-family: "digital";
     font-size: 175px;

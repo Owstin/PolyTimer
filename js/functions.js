@@ -124,6 +124,12 @@ function updateSettings() {
     //show time during solves
     if (localStorage.getItem("showTime") == null) {showTime = true;} else {showTime = JSON.parse(localStorage.getItem("showTime"));}
     document.getElementById("checkBoxHideShowTime").checked == showTime;
+
+    //draw scramble
+    var scrambleDiv = document.getElementById("scrambleDiv");
+    if (localStorage.getItem("drawScramble") == null) {drawScramble = false; scrambleDiv.style.display = "none";} else {drawScramble = JSON.parse(localStorage.getItem("drawScramble")); 
+    if (drawScramble == false) {scrambleDiv.style.display = "none"} else {scrambleDiv.style.display = "block";}}
+    document.getElementById("checkBoxHideShowScramble").checked == drawScramble;
 }
 
 function hideShowTime() {
@@ -134,6 +140,20 @@ function hideShowTime() {
     }
 
     localStorage.setItem("showTime", JSON.stringify(showTime));
+}
+
+function hideShowScramble() {
+    var scrambleDiv = document.getElementById("scrambleDiv");
+
+    if (drawScramble == false) {
+        drawScramble = true;
+        scrambleDiv.style.display = "block";
+    } else {
+        drawScramble = false;
+        scrambleDiv.style.display = "none";
+    }
+
+    localStorage.setItem("drawScramble", JSON.stringify(drawScramble));
 }
 
 function clearSolves() {
@@ -203,4 +223,17 @@ function changeScramble() {
     scrambleType = selectedVal;
     localStorage.setItem("scrambleType", JSON.stringify(scrambleType));
     window.location.reload(true);
+}
+
+function removeElement(elementId) {
+    var element = document.getElementById(elementId);
+    element.parentNode.removeChild(element);
+}
+
+function updateScramble(scramble) {
+    // Create an element and draw the scramble in it.
+    var innerDiv = document.createElement("div");
+    innerDiv.setAttribute("id", "scrambleDiv");
+    scramblers[scrambleType].drawScramble(innerDiv, scramble.state, 200, 120);
+    document.body.appendChild(innerDiv);
 }

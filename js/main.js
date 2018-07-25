@@ -61,22 +61,22 @@ if (localStorage.getItem("scrambleType") === null) {
     var scrambleType = JSON.parse(localStorage.getItem("scrambleType"));
 }
 
-if (scrambleType === "222") {var generatedScramble = scramblers["222"].getRandomScramble().scramble_string;}
-if (scrambleType === "333") {var generatedScramble = scramblers["333"].getRandomScramble().scramble_string;}
-if (scrambleType === "444") {var generatedScramble = scramblers["444"].getRandomScramble().scramble_string;}
-if (scrambleType === "555") {var generatedScramble = scramblers["555"].getRandomScramble().scramble_string;}
-if (scrambleType === "666") {var generatedScramble = scramblers["666"].getRandomScramble().scramble_string;}
-if (scrambleType === "777") {var generatedScramble = scramblers["777"].getRandomScramble().scramble_string;}
+if (scrambleType === "222") {var generatedScramble = scramblers["222"].getRandomScramble();}
+if (scrambleType === "333") {var generatedScramble = scramblers["333"].getRandomScramble();}
+if (scrambleType === "444") {var generatedScramble = scramblers["444"].getRandomScramble();}
+if (scrambleType === "555") {var generatedScramble = scramblers["555"].getRandomScramble();}
+if (scrambleType === "666") {var generatedScramble = scramblers["666"].getRandomScramble();}
+if (scrambleType === "777") {var generatedScramble = scramblers["777"].getRandomScramble();}
 
-if (scrambleType === "333bf") {var generatedScramble = scramblers["333bf"].getRandomScramble().scramble_string;}
-if (scrambleType === "minx") {var generatedScramble = scramblers["minx"].getRandomScramble().scramble_string;}
-if (scrambleType === "pyram") {var generatedScramble = scramblers["pyram"].getRandomScramble().scramble_string;}
-if (scrambleType === "sq1") {var generatedScramble = scramblers["sq1"].getRandomScramble().scramble_string;}
-if (scrambleType === "clock") {var generatedScramble = scramblers["clock"].getRandomScramble().scramble_string;}
+if (scrambleType === "333bf") {var generatedScramble = scramblers["333bf"].getRandomScramble();}
+if (scrambleType === "minx") {var generatedScramble = scramblers["minx"].getRandomScramble();}
+if (scrambleType === "pyram") {var generatedScramble = scramblers["pyram"].getRandomScramble();}
+if (scrambleType === "sq1") {var generatedScramble = scramblers["sq1"].getRandomScramble();}
+if (scrambleType === "clock") {var generatedScramble = scramblers["clock"].getRandomScramble();}
 
-scramble.textContent = generatedScramble;
+scramble.textContent = generatedScramble.scramble_string;
 
-var scrambles = [generatedScramble];
+var scrambles = [generatedScramble.scramble_string];
 var scrambleIndex = 0;
 
 var table = document.getElementById("solvesTable");
@@ -100,22 +100,25 @@ document.body.onkeyup = function(e) {
             }
 
             
-            if (scrambleType === "222") {var generatedScramble = scramblers["222"].getRandomScramble().scramble_string;}
-            if (scrambleType === "333") {var generatedScramble = scramblers["333"].getRandomScramble().scramble_string;}
-            if (scrambleType === "444") {var generatedScramble = scramblers["444"].getRandomScramble().scramble_string;}
-            if (scrambleType === "555") {var generatedScramble = scramblers["555"].getRandomScramble().scramble_string;}
-            if (scrambleType === "666") {var generatedScramble = scramblers["666"].getRandomScramble().scramble_string;}
-            if (scrambleType === "777") {var generatedScramble = scramblers["777"].getRandomScramble().scramble_string;}
+            if (scrambleType === "222") {var generatedScramble = scramblers["222"].getRandomScramble();}
+            if (scrambleType === "333") {var generatedScramble = scramblers["333"].getRandomScramble();}
+            if (scrambleType === "444") {var generatedScramble = scramblers["444"].getRandomScramble();}
+            if (scrambleType === "555") {var generatedScramble = scramblers["555"].getRandomScramble();}
+            if (scrambleType === "666") {var generatedScramble = scramblers["666"].getRandomScramble();}
+            if (scrambleType === "777") {var generatedScramble = scramblers["777"].getRandomScramble();}
             
-            if (scrambleType === "333bf") {var generatedScramble = scramblers["333bf"].getRandomScramble().scramble_string;}
-            if (scrambleType === "minx") {var generatedScramble = scramblers["minx"].getRandomScramble().scramble_string;}
-            if (scrambleType === "pyram") {var generatedScramble = scramblers["pyram"].getRandomScramble().scramble_string;}
-            if (scrambleType === "sq1") {var generatedScramble = scramblers["sq1"].getRandomScramble().scramble_string;}
-            if (scrambleType === "clock") {var generatedScramble = scramblers["clock"].getRandomScramble().scramble_string;}
+            if (scrambleType === "333bf") {var generatedScramble = scramblers["333bf"].getRandomScramble();}
+            if (scrambleType === "minx") {var generatedScramble = scramblers["minx"].getRandomScramble();}
+            if (scrambleType === "pyram") {var generatedScramble = scramblers["pyram"].getRandomScramble();}
+            if (scrambleType === "sq1") {var generatedScramble = scramblers["sq1"].getRandomScramble();}
+            if (scrambleType === "clock") {var generatedScramble = scramblers["clock"].getRandomScramble();}
             
-            scrambles.push(generatedScramble);
-            scramble.textContent = generatedScramble;
+            scrambles.push(generatedScramble.scramble_string);
+            scramble.textContent = generatedScramble.scramble_string;
             scrambleIndex += 1;
+
+            removeElement("scrambleDiv");
+            updateScramble(generatedScramble);
         } else {
             watch.ready();
         }
