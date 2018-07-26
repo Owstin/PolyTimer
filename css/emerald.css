@@ -1,0 +1,230 @@
+@font-face {
+    font-family: typewriter;
+    src: url(fonts/typewriter.otf);
+}
+
+@font-face {
+    font-family: digital;
+    src: url(fonts/digital.ttf);
+}
+
+@font-face {
+    font-family: roboto;
+    src: url(fonts/roboto.ttf);
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 97%;
+    background-color: #29ffcd;
+    color: #000;
+    font-family: "roboto";
+}
+
+#container {
+    width: 100%;
+    height: 100%;
+}
+
+#topBar {
+    position: fixed;
+    background-color: #008a6a;
+    color: #FFF;
+    width: 100%;
+    height: 40px;
+    box-shadow: 0px 1px 10px #000;
+}
+
+#fillerBar {
+    width: 100%;
+    height: 40px;
+}
+
+#leftBlock {
+    background-color: #009b77;
+    padding-bottom: 4px;
+    height: 100%;
+    width: 20%;
+    float: left;
+}
+
+#leftBlockShadow {
+    position: fixed;
+    height: 100%;
+    width: 20%;
+    float: left;
+    box-shadow: 10px -3px 10px -10px #000;
+}
+
+#solvesTable {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+#headerTr {
+    background-color: #009b77;
+}
+
+#solvesTr {
+    background-color: #008a6a;
+}
+
+#solvesTd {
+    padding: 3px;
+}
+
+#solvesTr:nth-child(even) {
+    background-color: #009b77;
+}
+
+#rightBlock {
+    height: 100%;
+    width: 80%;
+    float: right;
+}
+
+#timerDiv {
+    position: fixed;
+    width: 80%;
+}
+
+#timerElements {
+    text-align: center;
+}
+
+#discordButton {
+    position: fixed;
+    bottom: 3px;
+    right: 5px;
+    opacity: 0.15;
+}
+
+#discordButton:hover {
+    opacity: 1;
+}
+
+#logoText {
+    font-size: 20pt;
+}
+
+#menuButton {
+    font-size: 20pt;
+    margin-left: 8px;
+    margin-right: 5px;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+#menuButton:hover {
+    cursor: pointer;
+}
+
+#scramble {
+    display: block;
+    width: 80%;
+    font-size: 14pt;
+    word-spacing: 12px;
+    margin: auto;
+}
+
+#scrambleDiv {
+    display: none;
+    position: fixed;
+    top: 50px;
+    right: 40px;
+    z-index: 9;
+    text-align: center;
+}
+
+#timer {
+    font-family: "digital";
+    font-size: 175px;
+    font-weight: 300;
+    margin-top: 175px;
+}
+
+#clearLink {
+    color: #FFF;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* The Modal (background) */
+.modal {
+    vertical-align: middle;
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    margin-top: 40px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    float: left;
+    background-color: #009b77;
+    padding: 0;
+    width: 20%;
+    overflow: auto;
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.5s;
+    animation-name: animatetop;
+    animation-duration: 0.5s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {bottom:-900px; opacity:1} 
+    to {bottom:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {bottom:-900px; opacity:1}
+    to {bottom:0; opacity:1}
+}
+
+.modal-body {
+    padding: 2px 16px;
+    text-align: left;
+}
+
+.collapseContent {
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+}
+
+.collapsible {
+    background-color: #007a5e;
+    color: white;
+    cursor: pointer;
+    padding: 8px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 12pt;
+}
+
+.active, .collapsible:hover {
+    background-color: #006b52;
+}
+
+.collapsible:after {
+    content: '\025BC'; /* Unicode character for "plus" sign (+) */
+    font-size: 10pt;
+    color: white;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: "\025B2"; /* Unicode character for "minus" sign (-) */
+}

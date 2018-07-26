@@ -95,7 +95,7 @@ document.body.onkeyup = function(e) {
                 timer.style.color = 'white';
             }
 
-            if (getActiveStyleSheet() === "light" || getActiveStyleSheet() == "ocean" || getActiveStyleSheet() == "ccff00") {
+            if (getActiveStyleSheet() === "light" || getActiveStyleSheet() == "ocean" || getActiveStyleSheet() == "ccff00" || getActiveStyleSheet() == "emerald") {
                 timer.style.color = "black";
             }
 
@@ -133,7 +133,7 @@ document.body.onkeydown = function(e) {
             timer.style.color = 'white';
         }
 
-        if (getActiveStyleSheet() === "light" || getActiveStyleSheet() == "ocean" || getActiveStyleSheet() == "ccff00") {
+        if (getActiveStyleSheet() === "light" || getActiveStyleSheet() == "ocean" || getActiveStyleSheet() == "ccff00" || getActiveStyleSheet() == "emerald") {
             timer.style.color = "black";
         }
 
