@@ -176,21 +176,57 @@ body, html {
     padding: 0;
     width: 20%;
     overflow: auto;
-    -webkit-animation-name: animatetop;
+    -webkit-animation-name: slideUp;
     -webkit-animation-duration: 0.5s;
-    animation-name: animatetop;
+    animation-name: slideUp;
     animation-duration: 0.5;
 }
 
-/* Add Animation */
-@-webkit-keyframes animatetop {
-    from {bottom:-900px; opacity:1} 
-    to {bottom:0; opacity:1}
+.windowModal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-@keyframes animatetop {
-    from {bottom:-900px; opacity:1}
-    to {bottom:0; opacity:1}
+.windowModal-content {
+    position: relative;
+    background-color: #444;
+    margin: auto;
+    padding: 0;
+    width: 225px;
+    -webkit-animation-name: slideDown;
+    -webkit-animation-duration: 0.5s;
+    animation-name: slideDown;
+    animation-duration: 0.5;
+}
+
+/* Slide up animation */
+@-webkit-keyframes slideUp {
+    from {bottom:-900px;} 
+    to {bottom:0;}
+}
+
+@keyframes slideUp {
+    from {bottom:-900px;}
+    to {bottom:0;}
+}
+
+/* Slide down animation */
+@-webkit-keyframes slideDown {
+    from{top:-300px; opacity: 0;}
+    to {top: 0; opacity: 1;}
+}
+
+@keyframes slideDown {
+    from{top:-300px; opacity: 0;}
+    to {top: 0; opacity: 1;}
 }
 
 .modal-body {

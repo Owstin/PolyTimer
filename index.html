@@ -247,6 +247,7 @@
                     <div style="padding: 2px;">
                         <p>Controls:</p>
                         <p><b>Start/Stop the timer:</b> Space bar</p>
+                        <p><b>Manually add a solve:</b> Plus Sign (+)</p>
                         <p><b>Delete the last solve:</b> Backspace</p>
                         <p><b>Last scramble:</b> Left arrow key</p>
                         <p><b>Next scramble:</b> Right arrow key</p>
@@ -305,9 +306,24 @@
         </div>
     </div>
 
+    <div id="inputWindow" class="windowModal">
+        <div class="windowModal-content">
+            <div class="modal-body">
+                <form id="manualSolveForm">
+                    <p>Enter your solve time.</p>
+                    <span>(Ex: 4.22 or 1:14.86)</span><br><br>
+                    <input type="text" name="solveTimeBox" style="width: 100px;" autofocus>
+                    <button id="submitButton" onsubmit="addSolve(); return false;">Add</button>
+                    <br><br>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Get the modal
         var modal = document.getElementById('settingsMenu');
+        var inputWindow = document.getElementById('inputWindow');
         
         // Get the button that opens the modal
         var menuButton = document.getElementById("menuButton");
@@ -322,6 +338,20 @@
                 modal.style.display = "flex";
             }
         }
+
+        //Open manual solve input window
+        /*document.body.onkeydown = function(e) {
+            if (e.keyCode == 61) {
+                inputWindow.style.display = "flex";
+                document.getElementById("solveTimeBox").focus();
+            }
+
+            //close any windows that are open
+            if (e.keyCode == 27) {
+                inputWindow.style.display = "none";
+            }
+        }*/
+        
     </script>
 
     <script>

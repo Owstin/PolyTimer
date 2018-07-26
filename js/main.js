@@ -1,9 +1,7 @@
 var timer = document.getElementById('timer');
-var ready = document.getElementById('ready');
 var scramble = document.getElementById('scramble');
 
 var watch = new Timer(timer);
-var ready = false;
 
 var settingsOpen = false;
 
@@ -18,6 +16,7 @@ function toMS(str) {
     }
 }
 
+//Formats milliseconds into strings of time
 function timeFormatter(s) {
     var ms = s % 1000;
     s = (s - ms) / 1000;
@@ -55,6 +54,7 @@ function timeFormatter(s) {
     }
 }
 
+//retrieve the previously used scramble type from local storage
 if (localStorage.getItem("scrambleType") === null) {
     var scrambleType = "333";
 } else {
@@ -128,6 +128,7 @@ document.body.onkeyup = function(e) {
 document.body.onkeydown = function(e) {
     if (watch.isOn()) {
         watch.stop();
+        canStart = false;
         
         if (getActiveStyleSheet() === "default") {
             timer.style.color = 'white';
@@ -243,6 +244,12 @@ document.body.onkeydown = function(e) {
 
         updateStatistics();
     } else {
+        //prepare to start timer 
+        if (e.keyCode === 32) {
+            watch.reset();
+            timer.style.color = 'red';
+        }
+
         //previous scramble (left arrow)
         if (e.keyCode === 37 && scrambleIndex > 0) {
             scrambleIndex -= 1;
@@ -254,12 +261,13 @@ document.body.onkeydown = function(e) {
             scrambleIndex += 1;
             scramble.textContent = scrambles[scrambleIndex];
         }
-    
-        if (e.keyCode === 32) {
-            watch.reset();
-            timer.style.color = 'red';
+
+        //manually add solve (plus sign)
+        if (e.keyCode === 61) {
+            addSolve();
         }
     
+        //delete last solve (backspace)
         if (e.keyCode === 8 && solves.length > 0) {
             var delConfirm = confirm("Delete last solve?");
 
