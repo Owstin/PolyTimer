@@ -26,8 +26,9 @@
     <script src="jsss-master/scramble_sq1.js"></script>
     <script src="jsss-master/scramble_clock.js"></script>
 
-    <!--function dump-->
+    <!--other stuff-->
     <script type="text/javascript" src="js/functions.js"></script>
+    <script type="text/javascript" src="js/sessions.js"></script>
 </head>
 
 <body onload="updateScrambleBox(); updateThemeBox(); updateSession(); updateSettings(); updateStatistics();">
@@ -49,17 +50,20 @@
                 <script>
                     //Open the session that was last used if it exists
                     if (localStorage.getItem("currentSession") === null) {
-                        currentSession = "1";
+                        currentSession = 0;
                     } else {
                         currentSession = JSON.parse(localStorage.getItem("currentSession"));
                     }
 
                     //update the sessions array if it's in local storage
                     if (localStorage.getItem("sessions") === null) {
-                        var sessions = [solves];
-                        sessions.push("blank");
+                        var seshNames = ["Default"];
+
+                        var sessions = [new Array];
+                        //sessions.push("blank");
                     } else {
                         var sessions = JSON.parse(localStorage.getItem("sessions"));
+                        var seshNames = JSON.parse(localStorage.getItem("seshNames"));
                     }
 
                     //update the solves/ao5s/ao12s arrays if they're in local storage
@@ -199,21 +203,19 @@
                             <td style="padding: 2px">Session: </td>
                             <td style="padding: 2px">
                             <select id="sessionSelect" onchange="changeSession()">
-                                <option value="new">New Session</option>
+                                <option value="new">Create Session</option>
                                 <script>
                                 var options = '';
                 
-                                for (var i = 0; i < sessions.length-1; i++) {
-                                    var index = sessions[i+1];
-                
-                                    if (index !== "deleted") {
-                                        options += '<option value=\"' + (i+1) + '\">Session ' + (i+1) + '</option>';
-                                    }
+                                for (var i = 0; i < sessions.length; i++) {       
+                                    options += '<option value=\"' + (i) + '\">' + seshNames[i] + '</option>';
                                 }
                 
                                 document.write(options);
                                 </script>
                             </select>
+                            <a id="clearLink" style="text-decoration: none;" onclick="renameSession()" title="Rename">&#9998;</a>
+                            <a id="clearLink" style="text-decoration: none;" onclick="deleteSession()" title="Delete">&#128465;</a>
                             </td>
                         </tr>
                         <tr>
@@ -320,6 +322,8 @@
         </div>
     </div>-->
 
+    <script type="text/javascript" src="js/dropdown.js"></script>
+
     <script>
         // Get the modal
         var modal = document.getElementById('settingsMenu');
@@ -339,19 +343,13 @@
             }
         }
 
-        //Open manual solve input window
-        /*document.body.onkeydown = function(e) {
-            if (e.keyCode == 61) {
-                inputWindow.style.display = "flex";
-                document.getElementById("solveTimeBox").focus();
-            }
-
+        document.body.onkeydown = function(e) {
             //close any windows that are open
             if (e.keyCode == 27) {
-                inputWindow.style.display = "none";
+                settingsOpen = false;
+                modal.style.display = "none";
             }
-        }*/
-        
+        }
     </script>
 
     <script>

@@ -145,6 +145,7 @@ document.body.onkeydown = function(e) {
         solves.push(msTime);
         sessions.splice(currentSession, 1, solves);
         localStorage.setItem("sessions", JSON.stringify(sessions));
+        localStorage.setItem("seshNames", JSON.stringify(seshNames));
 
         var row = table.insertRow(1);
         var col1 = row.insertCell(0);
@@ -280,6 +281,7 @@ document.body.onkeydown = function(e) {
                 timer.textContent = "0.00";
 
                 localStorage.setItem("sessions", JSON.stringify(sessions));
+                localStorage.setItem("seshNames", JSON.stringify(seshNames));
 
                 localStorage.setItem("solves", JSON.stringify(solves));
                 localStorage.setItem("ao5s", JSON.stringify(ao5s));

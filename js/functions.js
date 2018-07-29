@@ -178,36 +178,6 @@ function updateScrambleBox() {
     }
 }
 
-function updateSession() {
-    var selectBox = document.getElementById("sessionSelect");
-    
-    if (currentSession > 1 && !selectBox.options[currentSession]) {
-        selectBox.add(new Option('Session ' + currentSession, currentSession));
-    }
-
-    if (localStorage.getItem("currentSession") === null) {
-        selectBox.value = "1";
-    } else {
-        selectBox.value = JSON.parse(localStorage.getItem("currentSession"));
-    }
-}
-
-function changeSession() {
-    var selectBox = document.getElementById("sessionSelect");
-
-    if (selectBox.value == "new") {
-        sessions.push();
-        currentSession = sessions.length;
-    } else {
-        currentSession = Number(selectBox.value);
-    }
-    
-    localStorage.setItem("sessions", JSON.stringify(sessions));
-    localStorage.setItem("currentSession", JSON.stringify(currentSession));
-
-    window.location.reload(true);
-}
-
 function changeTheme() {
     var selectBox = document.getElementById("selectBoxTheme");
     var theme = selectBox.value;
