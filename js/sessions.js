@@ -69,7 +69,7 @@ function renameSession() {
 
     if (newSeshName != null) {
         if (newSeshName != "") {
-            seshNames.splice(currentSession, 0, newSeshName);
+            seshNames.splice(currentSession, 1, newSeshName);
 
             localStorage.setItem("sessions", JSON.stringify(sessions));
             localStorage.setItem("seshNames", JSON.stringify(seshNames));
