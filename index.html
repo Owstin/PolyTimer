@@ -322,8 +322,6 @@
         </div>
     </div>-->
 
-    <script type="text/javascript" src="js/dropdown.js"></script>
-
     <script>
         // Get the modal
         var modal = document.getElementById('settingsMenu');
@@ -340,14 +338,6 @@
             } else {
                 settingsOpen = true;
                 modal.style.display = "flex";
-            }
-        }
-
-        document.body.onkeydown = function(e) {
-            //close any windows that are open
-            if (e.keyCode == 27) {
-                settingsOpen = false;
-                modal.style.display = "none";
             }
         }
     </script>
