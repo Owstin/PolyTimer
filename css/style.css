@@ -48,7 +48,7 @@ body, html {
 #leftBlock {
     background-color: #444;
     padding-bottom: 4px;
-    height: 100%;
+    height: calc(100% - 5px);
     width: 20%;
     float: left;
 }
@@ -165,7 +165,7 @@ body, html {
     left: 0;
     top: 0;
     width: 100%; /* Full width */
-    height: calc(100% - 40px);
+    height: calc(100% - 20px);
 }
 
 /* Modal Content */
@@ -175,7 +175,7 @@ body, html {
     background-color: #444;
     padding: 0;
     width: 20%;
-    overflow: auto;
+    overflow: scroll;
     -webkit-animation-name: slideUp;
     -webkit-animation-duration: 0.5s;
     animation-name: slideUp;
