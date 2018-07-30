@@ -126,10 +126,10 @@ function updateSettings() {
     document.getElementById("checkBoxHideShowTime").checked == showTime;
 
     //draw scramble
-    var scrambleDiv = document.getElementById("scrambleDiv");
+    /*var scrambleDiv = document.getElementById("scrambleDiv");
     if (localStorage.getItem("drawScramble") == null) {drawScramble = false; scrambleDiv.style.display = "none";} else {drawScramble = JSON.parse(localStorage.getItem("drawScramble")); 
     if (drawScramble == false) {scrambleDiv.style.display = "none"} else {scrambleDiv.style.display = "block";}}
-    document.getElementById("checkBoxHideShowScramble").checked == drawScramble;
+    document.getElementById("checkBoxHideShowScramble").checked == drawScramble;*/
 }
 
 function hideShowTime() {
