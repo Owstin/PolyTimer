@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css" title="default">
     <link rel="alternate stylesheet" type="text/css" href="css/light.css" title="light">
     <link rel="alternate stylesheet" type="text/css" href="css/ocean.css" title="ocean">
+    <link rel="alternate stylesheet" type="text/css" href="css/emerald.css" title="emerald">
     <link rel="alternate stylesheet" type="text/css" href="css/ccff00.css" title="ccff00">
 
     <!--stylesheet switcher-->
@@ -25,8 +26,9 @@
     <script src="jsss-master/scramble_sq1.js"></script>
     <script src="jsss-master/scramble_clock.js"></script>
 
-    <!--function dump-->
+    <!--other stuff-->
     <script type="text/javascript" src="js/functions.js"></script>
+    <script type="text/javascript" src="js/sessions.js"></script>
 </head>
 
 <body onload="updateScrambleBox(); updateThemeBox(); updateSession(); updateSettings(); updateStatistics();">
@@ -48,17 +50,20 @@
                 <script>
                     //Open the session that was last used if it exists
                     if (localStorage.getItem("currentSession") === null) {
-                        currentSession = "1";
+                        currentSession = 0;
                     } else {
                         currentSession = JSON.parse(localStorage.getItem("currentSession"));
                     }
 
                     //update the sessions array if it's in local storage
                     if (localStorage.getItem("sessions") === null) {
-                        var sessions = [solves];
-                        sessions.push("blank");
+                        var seshNames = ["Default"];
+
+                        var sessions = [new Array];
+                        //sessions.push("blank");
                     } else {
                         var sessions = JSON.parse(localStorage.getItem("sessions"));
+                        var seshNames = JSON.parse(localStorage.getItem("seshNames"));
                     }
 
                     //update the solves/ao5s/ao12s arrays if they're in local storage
@@ -118,7 +123,7 @@
             </table>
         </div>
 
-        <div id="rightBlock">
+        <div id="rightBlock" ontouchend="watch.start()">
             <div id="timerDiv">
                 <div id="timerElements">
                     <h1 id="timer">0.00</h1>
@@ -198,21 +203,19 @@
                             <td style="padding: 2px">Session: </td>
                             <td style="padding: 2px">
                             <select id="sessionSelect" onchange="changeSession()">
-                                <option value="new">New Session</option>
+                                <option value="new">Create Session</option>
                                 <script>
                                 var options = '';
                 
-                                for (var i = 0; i < sessions.length-1; i++) {
-                                    var index = sessions[i+1];
-                
-                                    if (index !== "deleted") {
-                                        options += '<option value=\"' + (i+1) + '\">Session ' + (i+1) + '</option>';
-                                    }
+                                for (var i = 0; i < sessions.length; i++) {       
+                                    options += '<option value=\"' + (i) + '\">' + seshNames[i] + '</option>';
                                 }
                 
                                 document.write(options);
                                 </script>
                             </select>
+                            <a id="clearLink" style="text-decoration: none;" onclick="renameSession()" title="Rename">&#9998;</a>
+                            <a id="clearLink" style="text-decoration: none;" onclick="deleteSession()" title="Delete">&#128465;</a>
                             </td>
                         </tr>
                         <tr>
@@ -233,10 +236,20 @@
                             </select>
                             </td>
                         </tr>
-                    </table>
+                    </table><br>
+
+                    <!--<table> un-comment this when scramble drawing is fixed
+                        <tr>
+                            <td style="padding: 2px;"><input type="checkbox" id="checkBoxHideShowScramble" onclick="hideShowScramble();"></td><td style="padding: 2px;"> Draw scramble</td>
+                        </tr>
+                    </table>-->
+
+                    <hr>
+
                     <div style="padding: 2px;">
                         <p>Controls:</p>
                         <p><b>Start/Stop the timer:</b> Space bar</p>
+                        <p><b>Manually add a solve:</b> Plus Sign (+)</p>
                         <p><b>Delete the last solve:</b> Backspace</p>
                         <p><b>Last scramble:</b> Left arrow key</p>
                         <p><b>Next scramble:</b> Right arrow key</p>
@@ -258,14 +271,15 @@
                                     <option value="default" selected="selected">Dark</option>
                                     <option value="light">Light</option>
                                     <option value="ocean">Ocean</option>
+                                    <option value="emerald">Emerald</option>
                                     <option value="ccff00">#CCFF00</option>
                                 </select>
                             </td>
                         </tr>
-                    </table>
+                    </table><br>
                     <table>
                         <tr>
-                            <td style="padding: 2px;"><input type="checkbox" id="checkBoxHideShowTime" onclick="hideShowTime();" checked></td><td style="padding: 2px;"> Show time while solving?</td>
+                            <td style="padding: 2px;"><input type="checkbox" id="checkBoxHideShowTime" onclick="hideShowTime();" checked></td><td style="padding: 2px;"> Show time while solving</td>
                         </tr>
                     </table><br>
                 </div>
@@ -279,6 +293,10 @@
                     <p><a id="clearLink" target="_blank" href="todo.txt">> Upcoming features</a><br>
                     <a id="clearLink" target="_blank" href="knownbugs.txt">> Known bugs</a></p>
                     <hr>
+                    <p style="font-weight: bold;">DISCLAIMER:</p>
+                    <p>This timer is in beta, and due to the nature of the way your data is stored, there may occasionally be updates that 
+                    cause you to have to reset your sessions in order to continue using the timer. As soon as I can reliably update without
+                    risking any data loss, the site will be taken out of beta. Thank you for using PolyTimer!</p><hr>
                     <table>
                         <tr style="font-weight: bold;"><td>Special thanks to...</td></tr>
                         <tr><td>Rouxles</td></tr>
@@ -288,15 +306,30 @@
                         <tr><td>Enay guy</td></tr>
                         <tr><td>Niccbudd</td></tr>
                         <tr><td>Owstin</td></tr>
-                    </table><br><br>
+                    </table><br>
                 </div>
             </div>
         </div>
     </div>
 
-        <script>
+    <!--<div id="inputWindow" class="windowModal">
+        <div class="windowModal-content">
+            <div class="modal-body">
+                <form id="manualSolveForm">
+                    <p>Enter your solve time.</p>
+                    <span>(Ex: 4.22 or 1:14.86)</span><br><br>
+                    <input type="text" name="solveTimeBox" style="width: 100px;" autofocus>
+                    <button id="submitButton" onsubmit="addSolve(); return false;">Add</button>
+                    <br><br>
+                </form>
+            </div>
+        </div>
+    </div>-->
+
+    <script>
         // Get the modal
         var modal = document.getElementById('settingsMenu');
+        var inputWindow = document.getElementById('inputWindow');
         
         // Get the button that opens the modal
         var menuButton = document.getElementById("menuButton");
@@ -328,6 +361,15 @@
             }
             });
         }
+    </script>
+
+    <script src="jsss-master/lib/raphael-min.js"></script>
+    <script>
+        // Create an element and draw the scramble in it.
+        var newDiv = document.createElement("div");
+        newDiv.setAttribute("id", "scrambleDiv");
+        scramblers[scrambleType].drawScramble(newDiv, generatedScramble.state, 200, 200);
+        document.body.appendChild(newDiv);
     </script>
 </body>
 

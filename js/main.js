@@ -1,9 +1,7 @@
 var timer = document.getElementById('timer');
-var ready = document.getElementById('ready');
 var scramble = document.getElementById('scramble');
 
 var watch = new Timer(timer);
-var ready = false;
 
 var settingsOpen = false;
 
@@ -18,6 +16,7 @@ function toMS(str) {
     }
 }
 
+//Formats milliseconds into strings of time
 function timeFormatter(s) {
     var ms = s % 1000;
     s = (s - ms) / 1000;
@@ -55,28 +54,29 @@ function timeFormatter(s) {
     }
 }
 
+//retrieve the previously used scramble type from local storage
 if (localStorage.getItem("scrambleType") === null) {
     var scrambleType = "333";
 } else {
     var scrambleType = JSON.parse(localStorage.getItem("scrambleType"));
 }
 
-if (scrambleType === "222") {var generatedScramble = scramblers["222"].getRandomScramble().scramble_string;}
-if (scrambleType === "333") {var generatedScramble = scramblers["333"].getRandomScramble().scramble_string;}
-if (scrambleType === "444") {var generatedScramble = scramblers["444"].getRandomScramble().scramble_string;}
-if (scrambleType === "555") {var generatedScramble = scramblers["555"].getRandomScramble().scramble_string;}
-if (scrambleType === "666") {var generatedScramble = scramblers["666"].getRandomScramble().scramble_string;}
-if (scrambleType === "777") {var generatedScramble = scramblers["777"].getRandomScramble().scramble_string;}
+if (scrambleType === "222") {var generatedScramble = scramblers["222"].getRandomScramble();}
+if (scrambleType === "333") {var generatedScramble = scramblers["333"].getRandomScramble();}
+if (scrambleType === "444") {var generatedScramble = scramblers["444"].getRandomScramble();}
+if (scrambleType === "555") {var generatedScramble = scramblers["555"].getRandomScramble();}
+if (scrambleType === "666") {var generatedScramble = scramblers["666"].getRandomScramble();}
+if (scrambleType === "777") {var generatedScramble = scramblers["777"].getRandomScramble();}
 
-if (scrambleType === "333bf") {var generatedScramble = scramblers["333bf"].getRandomScramble().scramble_string;}
-if (scrambleType === "minx") {var generatedScramble = scramblers["minx"].getRandomScramble().scramble_string;}
-if (scrambleType === "pyram") {var generatedScramble = scramblers["pyram"].getRandomScramble().scramble_string;}
-if (scrambleType === "sq1") {var generatedScramble = scramblers["sq1"].getRandomScramble().scramble_string;}
-if (scrambleType === "clock") {var generatedScramble = scramblers["clock"].getRandomScramble().scramble_string;}
+if (scrambleType === "333bf") {var generatedScramble = scramblers["333bf"].getRandomScramble();}
+if (scrambleType === "minx") {var generatedScramble = scramblers["minx"].getRandomScramble();}
+if (scrambleType === "pyram") {var generatedScramble = scramblers["pyram"].getRandomScramble();}
+if (scrambleType === "sq1") {var generatedScramble = scramblers["sq1"].getRandomScramble();}
+if (scrambleType === "clock") {var generatedScramble = scramblers["clock"].getRandomScramble();}
 
-scramble.textContent = generatedScramble;
+scramble.textContent = generatedScramble.scramble_string;
 
-var scrambles = [generatedScramble];
+var scrambles = [generatedScramble.scramble_string];
 var scrambleIndex = 0;
 
 var table = document.getElementById("solvesTable");
@@ -95,27 +95,30 @@ document.body.onkeyup = function(e) {
                 timer.style.color = 'white';
             }
 
-            if (getActiveStyleSheet() === "light" || getActiveStyleSheet() == "ocean" || getActiveStyleSheet() == "ccff00") {
+            if (getActiveStyleSheet() === "light" || getActiveStyleSheet() == "ocean" || getActiveStyleSheet() == "ccff00" || getActiveStyleSheet() == "emerald") {
                 timer.style.color = "black";
             }
 
             
-            if (scrambleType === "222") {var generatedScramble = scramblers["222"].getRandomScramble().scramble_string;}
-            if (scrambleType === "333") {var generatedScramble = scramblers["333"].getRandomScramble().scramble_string;}
-            if (scrambleType === "444") {var generatedScramble = scramblers["444"].getRandomScramble().scramble_string;}
-            if (scrambleType === "555") {var generatedScramble = scramblers["555"].getRandomScramble().scramble_string;}
-            if (scrambleType === "666") {var generatedScramble = scramblers["666"].getRandomScramble().scramble_string;}
-            if (scrambleType === "777") {var generatedScramble = scramblers["777"].getRandomScramble().scramble_string;}
+            if (scrambleType === "222") {var generatedScramble = scramblers["222"].getRandomScramble();}
+            if (scrambleType === "333") {var generatedScramble = scramblers["333"].getRandomScramble();}
+            if (scrambleType === "444") {var generatedScramble = scramblers["444"].getRandomScramble();}
+            if (scrambleType === "555") {var generatedScramble = scramblers["555"].getRandomScramble();}
+            if (scrambleType === "666") {var generatedScramble = scramblers["666"].getRandomScramble();}
+            if (scrambleType === "777") {var generatedScramble = scramblers["777"].getRandomScramble();}
             
-            if (scrambleType === "333bf") {var generatedScramble = scramblers["333bf"].getRandomScramble().scramble_string;}
-            if (scrambleType === "minx") {var generatedScramble = scramblers["minx"].getRandomScramble().scramble_string;}
-            if (scrambleType === "pyram") {var generatedScramble = scramblers["pyram"].getRandomScramble().scramble_string;}
-            if (scrambleType === "sq1") {var generatedScramble = scramblers["sq1"].getRandomScramble().scramble_string;}
-            if (scrambleType === "clock") {var generatedScramble = scramblers["clock"].getRandomScramble().scramble_string;}
+            if (scrambleType === "333bf") {var generatedScramble = scramblers["333bf"].getRandomScramble();}
+            if (scrambleType === "minx") {var generatedScramble = scramblers["minx"].getRandomScramble();}
+            if (scrambleType === "pyram") {var generatedScramble = scramblers["pyram"].getRandomScramble();}
+            if (scrambleType === "sq1") {var generatedScramble = scramblers["sq1"].getRandomScramble();}
+            if (scrambleType === "clock") {var generatedScramble = scramblers["clock"].getRandomScramble();}
             
-            scrambles.push(generatedScramble);
-            scramble.textContent = generatedScramble;
+            scrambles.push(generatedScramble.scramble_string);
+            scramble.textContent = generatedScramble.scramble_string;
             scrambleIndex += 1;
+
+            removeElement("scrambleDiv");
+            updateScramble();
         } else {
             watch.ready();
         }
@@ -125,12 +128,13 @@ document.body.onkeyup = function(e) {
 document.body.onkeydown = function(e) {
     if (watch.isOn()) {
         watch.stop();
+        canStart = false;
         
         if (getActiveStyleSheet() === "default") {
             timer.style.color = 'white';
         }
 
-        if (getActiveStyleSheet() === "light" || getActiveStyleSheet() == "ocean" || getActiveStyleSheet() == "ccff00") {
+        if (getActiveStyleSheet() === "light" || getActiveStyleSheet() == "ocean" || getActiveStyleSheet() == "ccff00" || getActiveStyleSheet() == "emerald") {
             timer.style.color = "black";
         }
 
@@ -141,6 +145,7 @@ document.body.onkeydown = function(e) {
         solves.push(msTime);
         sessions.splice(currentSession, 1, solves);
         localStorage.setItem("sessions", JSON.stringify(sessions));
+        localStorage.setItem("seshNames", JSON.stringify(seshNames));
 
         var row = table.insertRow(1);
         var col1 = row.insertCell(0);
@@ -240,6 +245,12 @@ document.body.onkeydown = function(e) {
 
         updateStatistics();
     } else {
+        //prepare to start timer 
+        if (e.keyCode === 32) {
+            watch.reset();
+            timer.style.color = 'red';
+        }
+
         //previous scramble (left arrow)
         if (e.keyCode === 37 && scrambleIndex > 0) {
             scrambleIndex -= 1;
@@ -251,12 +262,13 @@ document.body.onkeydown = function(e) {
             scrambleIndex += 1;
             scramble.textContent = scrambles[scrambleIndex];
         }
-    
-        if (e.keyCode === 32) {
-            watch.reset();
-            timer.style.color = 'red';
+
+        //manually add solve (plus sign)
+        if (e.keyCode === 61) {
+            addSolve();
         }
     
+        //delete last solve (backspace)
         if (e.keyCode === 8 && solves.length > 0) {
             var delConfirm = confirm("Delete last solve?");
 
@@ -269,6 +281,7 @@ document.body.onkeydown = function(e) {
                 timer.textContent = "0.00";
 
                 localStorage.setItem("sessions", JSON.stringify(sessions));
+                localStorage.setItem("seshNames", JSON.stringify(seshNames));
 
                 localStorage.setItem("solves", JSON.stringify(solves));
                 localStorage.setItem("ao5s", JSON.stringify(ao5s));

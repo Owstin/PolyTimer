@@ -22,6 +22,11 @@ body, html {
     font-family: "roboto";
 }
 
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+
 #container {
     width: 100%;
     height: 100%;
@@ -129,6 +134,16 @@ body, html {
     margin: auto;
 }
 
+#scrambleDiv {
+    display: none;
+    position: fixed;
+    top: 50px;
+    right: 40px;
+    z-index: 9;
+    text-align: center;
+}
+
+
 #timer {
     font-family: "digital";
     font-size: 175px;
@@ -152,7 +167,7 @@ body, html {
     left: 0;
     top: 0;
     width: 100%; /* Full width */
-    height: 100%; /* Full height */
+    height: calc(100% - 40px);
 }
 
 /* Modal Content */
@@ -162,6 +177,7 @@ body, html {
     background-color: #5fc9cb;
     padding: 0;
     width: 20%;
+    overflow: auto;
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.5s;
     animation-name: animatetop;

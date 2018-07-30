@@ -1,9 +1,12 @@
 These are things that will be added in the future, in no particular order
 
 CURRENT TASKS:
--make sessions better
+
 -more detailed statistics
--draw scrambles
+-DNF and +2
+-fix scramble drawing (broken by sessions update)
+
+EVERYTHING ELSE:
 
 scramble:
 -save scrambles with solves for later reference
@@ -17,8 +20,6 @@ solves table:
 -custom sorting (by number, best/worst times, etc)
 -import/export solves to and from database
 -manually add solves
--DNF and +2
--fix sessions system
 -manually add move count
 -add notes about solves
 
@@ -29,23 +30,21 @@ theme:
 -background images
 
 misc:
--graph to display statistics
 -connect to wca account
 -connect to stackmat
 -mobile site + controls
--statistics (ao100, session average, etc)
 -versus mode a la twist the web
 
 sessions:
--creating/deleting
--renaming
+-duplicate sessions?
 
 statistics:
--giant background graph
--average move count
+-giant background graph (toggleable)
+-average move count? idk how this would work yet
 
 other:
--find a way to not have to reload when switching themes
+-switch themes without reloading
+-update sessions without reloading
 
 special thanks:
 Rouxles

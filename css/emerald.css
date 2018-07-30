@@ -17,8 +17,8 @@ body, html {
     margin: 0;
     padding: 0;
     height: 97%;
-    background-color: #222;
-    color: #FFF;
+    background-color: #eafffa;
+    color: #000;
     font-family: "roboto";
 }
 
@@ -34,7 +34,8 @@ body, html {
 
 #topBar {
     position: fixed;
-    background-color: #333;
+    background-color: #008a6a;
+    color: #FFF;
     width: 100%;
     height: 40px;
     box-shadow: 0px 1px 10px #000;
@@ -46,7 +47,7 @@ body, html {
 }
 
 #leftBlock {
-    background-color: #444;
+    background-color: #009b77;
     padding-bottom: 4px;
     height: 100%;
     width: 20%;
@@ -68,11 +69,11 @@ body, html {
 }
 
 #headerTr {
-    background-color: #444;
+    background-color: #009b77;
 }
 
 #solvesTr {
-    background-color: #333;
+    background-color: #008a6a;
 }
 
 #solvesTd {
@@ -80,7 +81,7 @@ body, html {
 }
 
 #solvesTr:nth-child(even) {
-    background-color: #444;
+    background-color: #009b77;
 }
 
 #rightBlock {
@@ -172,61 +173,25 @@ body, html {
 .modal-content {
     position: relative;
     float: left;
-    background-color: #444;
+    background-color: #009b77;
     padding: 0;
     width: 20%;
     overflow: auto;
-    -webkit-animation-name: slideUp;
+    -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.5s;
-    animation-name: slideUp;
-    animation-duration: 0.5;
+    animation-name: animatetop;
+    animation-duration: 0.5s
 }
 
-.windowModal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {bottom:-900px; opacity:1} 
+    to {bottom:0; opacity:1}
 }
 
-.windowModal-content {
-    position: relative;
-    background-color: #444;
-    margin: auto;
-    padding: 0;
-    width: 275px;
-    -webkit-animation-name: slideDown;
-    -webkit-animation-duration: 0.5s;
-    animation-name: slideDown;
-    animation-duration: 0.5;
-}
-
-/* Slide up animation */
-@-webkit-keyframes slideUp {
-    from {bottom:-900px;} 
-    to {bottom:0;}
-}
-
-@keyframes slideUp {
-    from {bottom:-900px;}
-    to {bottom:0;}
-}
-
-/* Slide down animation */
-@-webkit-keyframes slideDown {
-    from{top:-300px; opacity: 0;}
-    to {top: 0; opacity: 1;}
-}
-
-@keyframes slideDown {
-    from{top:-300px; opacity: 0;}
-    to {top: 0; opacity: 1;}
+@keyframes animatetop {
+    from {bottom:-900px; opacity:1}
+    to {bottom:0; opacity:1}
 }
 
 .modal-body {
@@ -242,7 +207,7 @@ body, html {
 }
 
 .collapsible {
-    background-color: #555;
+    background-color: #007a5e;
     color: white;
     cursor: pointer;
     padding: 8px;
@@ -254,7 +219,7 @@ body, html {
 }
 
 .active, .collapsible:hover {
-    background-color: #666;
+    background-color: #006b52;
 }
 
 .collapsible:after {
