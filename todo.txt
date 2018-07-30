@@ -2,9 +2,9 @@ These are things that will be added in the future, in no particular order
 
 CURRENT TASKS:
 
--make sessions better
 -more detailed statistics
 -DNF and +2
+-fix scramble drawing (broken by sessions update)
 
 EVERYTHING ELSE:
 

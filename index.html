@@ -123,7 +123,7 @@
             </table>
         </div>
 
-        <div id="rightBlock">
+        <div id="rightBlock" ontouchstart="if (timerOn == false) {timerPrep();} else {timerStop();}" ontouchend="if (timerOn == false) {timerStart();}">
             <div id="timerDiv">
                 <div id="timerElements">
                     <h1 id="timer">0.00</h1>
@@ -238,11 +238,11 @@
                         </tr>
                     </table><br>
 
-                    <table>
+                    <!--<table> un-comment this when scramble drawing is fixed
                         <tr>
                             <td style="padding: 2px;"><input type="checkbox" id="checkBoxHideShowScramble" onclick="hideShowScramble();"></td><td style="padding: 2px;"> Draw scramble</td>
                         </tr>
-                    </table>
+                    </table>-->
 
                     <hr>
 
@@ -293,6 +293,10 @@
                     <p><a id="clearLink" target="_blank" href="todo.txt">> Upcoming features</a><br>
                     <a id="clearLink" target="_blank" href="knownbugs.txt">> Known bugs</a></p>
                     <hr>
+                    <p style="font-weight: bold;">DISCLAIMER:</p>
+                    <p>This timer is in beta, and due to the nature of the way your data is stored, there may occasionally be updates that 
+                    cause you to have to reset your sessions in order to continue using the timer. As soon as I can reliably update without
+                    risking any data loss, the site will be taken out of beta. Thank you for using PolyTimer!</p><hr>
                     <table>
                         <tr style="font-weight: bold;"><td>Special thanks to...</td></tr>
                         <tr><td>Rouxles</td></tr>
@@ -302,7 +306,7 @@
                         <tr><td>Enay guy</td></tr>
                         <tr><td>Niccbudd</td></tr>
                         <tr><td>Owstin</td></tr>
-                    </table><br><br>
+                    </table><br>
                 </div>
             </div>
         </div>
@@ -361,13 +365,11 @@
 
     <script src="jsss-master/lib/raphael-min.js"></script>
     <script>
-        for (var i=1; i <= 1; i++) {
-            // Create an element and draw the scramble in it.
-            var innerDiv = document.createElement("div");
-            innerDiv.setAttribute("id", "scrambleDiv");
-            scramblers[scrambleType].drawScramble(innerDiv, generatedScramble.state, 200, 200);
-            document.body.appendChild(innerDiv);
-        }
+        // Create an element and draw the scramble in it.
+        var newDiv = document.createElement("div");
+        newDiv.setAttribute("id", "scrambleDiv");
+        scramblers[scrambleType].drawScramble(newDiv, generatedScramble.state, 200, 200);
+        document.body.appendChild(newDiv);
     </script>
 </body>
 

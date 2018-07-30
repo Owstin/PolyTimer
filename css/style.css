@@ -48,15 +48,16 @@ body, html {
 #leftBlock {
     background-color: #444;
     padding-bottom: 4px;
+    /*height: calc(100% - 5px); this fixes a weird scrolling bug that only exists in firefox but adds a bug in chrome*/
     height: 100%;
-    width: 20%;
+    width: 300px;;
     float: left;
 }
 
 #leftBlockShadow {
     position: fixed;
     height: 100%;
-    width: 20%;
+    width: 300px;;
     float: left;
     box-shadow: 10px -3px 10px -10px #000;
 }
@@ -85,7 +86,7 @@ body, html {
 
 #rightBlock {
     height: 100%;
-    width: 80%;
+    width: calc(100% - 300px);
     float: right;
 }
 
@@ -146,7 +147,7 @@ body, html {
     font-family: "digital";
     font-size: 175px;
     font-weight: 300;
-    margin-top: 175px;
+    margin-top: 15%;
 }
 
 #clearLink {
@@ -164,8 +165,8 @@ body, html {
     margin-top: 40px; /* Location of the box */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
+    width: 300px;;
+    height: calc(100% - 20px);
 }
 
 /* Modal Content */
@@ -174,8 +175,8 @@ body, html {
     float: left;
     background-color: #444;
     padding: 0;
-    width: 20%;
-    overflow: auto;
+    width: 300px;;
+    overflow: scroll;
     -webkit-animation-name: slideUp;
     -webkit-animation-duration: 0.5s;
     animation-name: slideUp;
@@ -200,7 +201,7 @@ body, html {
     background-color: #444;
     margin: auto;
     padding: 0;
-    width: 225px;
+    width: 275px;
     -webkit-animation-name: slideDown;
     -webkit-animation-duration: 0.5s;
     animation-name: slideDown;

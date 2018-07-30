@@ -2,6 +2,8 @@ var timer = document.getElementById('timer');
 var scramble = document.getElementById('scramble');
 
 var watch = new Timer(timer);
+var timerOn = false;
+var timerReady = true;
 
 var settingsOpen = false;
 
@@ -118,7 +120,7 @@ document.body.onkeyup = function(e) {
             scrambleIndex += 1;
 
             removeElement("scrambleDiv");
-            updateScramble(generatedScramble);
+            updateScramble();
         } else {
             watch.ready();
         }
