@@ -125,6 +125,10 @@ function updateSettings() {
     if (localStorage.getItem("showTime") == null) {showTime = true;} else {showTime = JSON.parse(localStorage.getItem("showTime"));}
     document.getElementById("checkBoxHideShowTime").checked == showTime;
 
+    //hide scramble during solves
+    if (localStorage.getItem("hideScramble") == null) {hideScramble = false;} else {hideScramble = JSON.parse(localStorage.getItem("hideScramble"));}
+    document.getElementById("checkBoxHideShowScrambleText").checked == hideScramble;
+
     //draw scramble
     /*var scrambleDiv = document.getElementById("scrambleDiv");
     if (localStorage.getItem("drawScramble") == null) {drawScramble = false; scrambleDiv.style.display = "none";} else {drawScramble = JSON.parse(localStorage.getItem("drawScramble")); 
@@ -132,14 +136,51 @@ function updateSettings() {
     document.getElementById("checkBoxHideShowScramble").checked == drawScramble;*/
 }
 
+function hideShowLeftBlock () {
+    var Lb = document.getElementById("leftBlock");
+    var Ls = document.getElementById("leftBlockShadow");
+    var Lh = document.getElementById("leftBlockHide");
+
+    var Rb = document.getElementById("rightBlock");
+
+    if (Lb.style.display == "none") {
+        Lb.setAttribute("style", "display: flex");
+        Ls.setAttribute("style", "width: 315px;");
+        Lh.setAttribute("style", "margin-left: 300px; z-index: 9;");
+
+        Rb.setAttribute("style", "width: calc(100% - 315px); float: right;");
+    } else {
+        Lb.setAttribute("style", "display: none");
+        Ls.setAttribute("style", "width: 15px;");
+        Lh.setAttribute("style", "margin-left: 0px; z-index: 0;");
+
+        Rb.style.removeProperty("width");
+        Rb.setAttribute("style", "float: none;");
+    }
+}
+
 function hideShowTime() {
+    var scrambleText = document.getElementById("scramble");
+
     if (showTime == true) {
         showTime = false;
+        scrambleText.visible = true;
     } else {
         showTime = true;
+        scrambleText.visible = false;
     }
 
     localStorage.setItem("showTime", JSON.stringify(showTime));
+}
+
+function hideShowScrambleText() {
+    if (hideScramble == true) {
+        hideScramble = false;
+    } else {
+        hideScramble = true;
+    }
+
+    localStorage.setItem("hideScramble", JSON.stringify(hideScramble));
 }
 
 function hideShowScramble() {
@@ -316,12 +357,15 @@ function addSolve () {
     updateStatistics();
 }
 
-function timerPrep() {
+var el = document.getElementsByTagName("canvas");  
+el.addEventListener("touchstart", handleStart, false); 
+
+function timerPrep() { //touch screen
     watch.reset();
     timer.style.color = 'red';
 }
 
-function timerStart() {
+function timerStart() { //touch screen
     if (!watch.isStopped()) {
         watch.start();
         timerOn = true;
@@ -359,7 +403,7 @@ function timerStart() {
     }
 }
 
-function timerStop() {
+function timerStop() { //touch screen
     if (watch.isOn()) {
         watch.stop();
         timerOn = false;
