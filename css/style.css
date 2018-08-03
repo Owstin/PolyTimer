@@ -50,7 +50,8 @@ body, html {
     display: flex;
     background-color: #444;
     padding-bottom: 4px;
-    height: calc(100% - 5px);
+    height: calc(100vh - 50px);
+    box-shadow: 0 50px 0 0 #444;
     width: 300px;
     float: left;
 }
@@ -112,14 +113,29 @@ body, html {
 }
 
 #timerDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: fixed;
     width: 80%;
+    height: 100%;
 }
 
 #timerElements {
     text-align: center;
     text-shadow: 5px 5px 10px #000;
+    width: 100%;
 }
+
+#timer {
+    display: block;
+    width: 100%;
+    font-family: "digital";
+    font-size: 225px;
+    font-weight: 300;
+    /*margin-top: 15%;*/
+}
+
 
 #discordButton {
     position: fixed;
@@ -149,7 +165,7 @@ body, html {
 
 #scramble {
     display: block;
-    width: 80%;
+    width: 95%;
     font-size: 14pt;
     word-spacing: 12px;
     margin: auto;
@@ -162,13 +178,6 @@ body, html {
     right: 40px;
     z-index: 9;
     text-align: center;
-}
-
-#timer {
-    font-family: "digital";
-    font-size: 175px;
-    font-weight: 300;
-    margin-top: 15%;
 }
 
 #clearLink {

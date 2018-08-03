@@ -123,11 +123,16 @@ function updateStatistics() {
 function updateSettings() {
     //show time during solves
     if (localStorage.getItem("showTime") == null) {showTime = true;} else {showTime = JSON.parse(localStorage.getItem("showTime"));}
-    document.getElementById("checkBoxHideShowTime").checked == showTime;
+    if (showTime == true) {document.getElementById("checkBoxHideShowTime").checked = false;} else {document.getElementById("checkBoxHideShowTime").checked = true;}
 
     //hide scramble during solves
     if (localStorage.getItem("hideScramble") == null) {hideScramble = false;} else {hideScramble = JSON.parse(localStorage.getItem("hideScramble"));}
-    document.getElementById("checkBoxHideShowScrambleText").checked == hideScramble;
+    if (hideScramble == true) {document.getElementById("checkBoxHideShowScrambleText").checked = true;} else {document.getElementById("checkBoxHideShowScrambleText").checked = false;}
+
+    //hide solves table during solves
+    document.getElementById("leftBlock").style.display = "flex";
+    if (localStorage.getItem("hideSolves") == null) {hideSolves = false;} else {hideSolves = JSON.parse(localStorage.getItem("hideSolves"));}
+    if (hideSolves == true) {document.getElementById("checkBoxHideShowSolves").checked = true;} else {document.getElementById("checkBoxHideShowSolves").checked = false;}
 
     //draw scramble
     /*var scrambleDiv = document.getElementById("scrambleDiv");
@@ -136,7 +141,7 @@ function updateSettings() {
     document.getElementById("checkBoxHideShowScramble").checked == drawScramble;*/
 }
 
-function hideShowLeftBlock () {
+function hideShowLeftBlock() {
     var Lb = document.getElementById("leftBlock");
     var Ls = document.getElementById("leftBlockShadow");
     var Lh = document.getElementById("leftBlockHide");
@@ -160,20 +165,18 @@ function hideShowLeftBlock () {
 }
 
 function hideShowTime() {
-    var scrambleText = document.getElementById("scramble");
-
     if (showTime == true) {
         showTime = false;
-        scrambleText.visible = true;
     } else {
         showTime = true;
-        scrambleText.visible = false;
     }
 
     localStorage.setItem("showTime", JSON.stringify(showTime));
 }
 
 function hideShowScrambleText() {
+    var scrambleText = document.getElementById("scramble");
+
     if (hideScramble == true) {
         hideScramble = false;
     } else {
@@ -181,6 +184,16 @@ function hideShowScrambleText() {
     }
 
     localStorage.setItem("hideScramble", JSON.stringify(hideScramble));
+}
+
+function hideShowSolvesTable() {
+    if (hideSolves == true) {
+        hideSolves = false;
+    } else {
+        hideSolves = true;
+    }
+
+    localStorage.setItem("hideSolves", JSON.stringify(hideSolves));
 }
 
 function hideShowScramble() {

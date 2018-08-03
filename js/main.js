@@ -93,6 +93,14 @@ document.body.onkeyup = function(e) {
         if (!watch.isStopped()) {
             watch.start();
 
+            //hide scramble during solves option
+            if (hideScramble == true) {scramble.style.visibility = "hidden";}
+
+            //hide solves table during solves option
+            if (hideSolves == true && document.getElementById("leftBlock").style.display == "flex") {
+                hideShowLeftBlock();
+            }
+
             if (getActiveStyleSheet() === "default") {
                 timer.style.color = 'white';
             }
@@ -131,6 +139,14 @@ document.body.onkeydown = function(e) {
     if (watch.isOn()) {
         watch.stop();
         canStart = false;
+
+        //show scramble again (hide scramble during solves option)
+        if (hideScramble == true) {scramble.style.visibility = "visible";}
+
+        //show solves table again
+        if (hideSolves == true && document.getElementById("leftBlock").style.display == "none") {
+            hideShowLeftBlock();
+        }
         
         if (getActiveStyleSheet() === "default") {
             timer.style.color = 'white';
@@ -253,6 +269,17 @@ document.body.onkeydown = function(e) {
             timer.style.color = 'red';
         }
 
+        //close any open menu
+        if (e.keyCode === 27) {
+            if (settingsOpen == true) {
+                settingsOpen = false;
+                modal.style.display = "none";
+            } else {
+                settingsOpen = true;
+                modal.style.display = "flex";
+            }
+        }
+
         //previous scramble (left arrow)
         if (e.keyCode === 37 && scrambleIndex > 0) {
             scrambleIndex -= 1;
@@ -265,8 +292,8 @@ document.body.onkeydown = function(e) {
             scramble.textContent = scrambles[scrambleIndex];
         }
 
-        //manually add solve (plus sign)
-        if (e.keyCode === 61) {
+        //manually add solve (A key because chrome and firefox don't get along)
+        if (e.keyCode === 65) {
             addSolve();
         }
     

@@ -119,7 +119,7 @@
                 </script>
             </table>
         </div>
-        <div id="leftBlockHide" onclick="hideShowLeftBlock()">
+        <div id="leftBlockHide" onclick="hideShowLeftBlock(); manualClose();">
             <table style="height: 100%;">
                 <tr style="height: 100%;">
                     <td style="height: 100%;"><span style="writing-mode: vertical-rl; letter-spacing: 10px; font-weight: bold; user-select: none;">...</span></td>
@@ -130,12 +130,13 @@
         <div id="rightBlock" ontouchstart="if (timerOn == false) {timerPrep();} else {timerStop();}" ontouchend="if (timerOn == false) {timerStart();}">
             <div id="timerDiv">
                 <div id="timerElements">
-                    <h1 id="timer">0.00</h1>
+                    <span id="timer">0.00</span><br><br><br>
                     <span id="scramble"></span>
-                    <script src="js/timer.js"></script>
-                    <script src="js/main.js"></script>
                 </div>
             </div>
+
+            <script src="js/timer.js"></script>
+            <script src="js/main.js"></script>
 
             <div id="discordButton">
                 <a target="_blank" href="https://discord.gg/UpN7pXf"><img src="img/Discord-Logo-White.PNG" height="64" width="64"></a>
@@ -253,7 +254,8 @@
                     <div style="padding: 2px;">
                         <p>Controls:</p>
                         <p><b>Start/Stop the timer:</b> Space bar</p>
-                        <p><b>Manually add a solve:</b> Plus Sign (+)</p>
+                        <p><b>Open/close the menu:</b> Escape</p>
+                        <p><b>Manually add a solve:</b> 'A' Key</p>
                         <p><b>Delete the last solve:</b> Backspace</p>
                         <p><b>Last scramble:</b> Left arrow key</p>
                         <p><b>Next scramble:</b> Right arrow key</p>
@@ -280,11 +282,14 @@
                     </table><br>
                     <table>
                         <tr>
-                            <td style="padding: 2px;"><input type="checkbox" id="checkBoxHideShowTime" onclick="hideShowTime();" checked></td><td style="padding: 2px;"> Show time while solving</td>
+                            <td style="padding: 2px;"><input type="checkbox" id="checkBoxHideShowTime" onclick="hideShowTime();"></td><td style="padding: 2px;"> Hide time while solving</td>
                         </tr>
-                        <!--<tr>
+                        <tr>
                             <td style="padding: 2px;"><input type="checkbox" id="checkBoxHideShowScrambleText" onclick="hideShowScrambleText();"></td><td style="padding: 2px;"> Hide scramble while solving</td>
-                        </tr>-->
+                        </tr>
+                        <tr>
+                            <td style="padding: 2px;"><input type="checkbox" id="checkBoxHideShowSolves" onclick="hideShowSolvesTable();"></td><td style="padding: 2px;"> Hide solves table while solving</td>
+                        </tr>
                     </table><br>
                 </div>
             </div>
@@ -316,19 +321,13 @@
         </div>
     </div>
 
-    <!--<div id="inputWindow" class="windowModal">
+    <div id="discordPopUp" class="windowModal">
         <div class="windowModal-content">
             <div class="modal-body">
-                <form id="manualSolveForm">
-                    <p>Enter your solve time.</p>
-                    <span>(Ex: 4.22 or 1:14.86)</span><br><br>
-                    <input type="text" name="solveTimeBox" style="width: 100px;" autofocus>
-                    <button id="submitButton" onsubmit="addSolve(); return false;">Add</button>
-                    <br><br>
-                </form>
+                this is some SHIT mang
             </div>
         </div>
-    </div>-->
+    </div>
 
     <script>
         // Get the modal

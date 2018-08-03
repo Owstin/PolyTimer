@@ -51,7 +51,8 @@ body, html {
     display: flex;
     background-color: #999;
     padding-bottom: 4px;
-    height: calc(100% - 5px);
+    height: calc(100vh - 50px);
+    box-shadow: 0 50px 0 0 #999;
     width: 300px;
     float: left;
 }
