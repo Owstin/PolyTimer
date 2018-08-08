@@ -431,6 +431,7 @@ function deleteLastSolve() {
     solves.pop();
     ao5s.pop();
     ao12s.pop();
+    usedScrambles.pop();
 
     var row = table.deleteRow(1);
     timer.textContent = "0.00";
