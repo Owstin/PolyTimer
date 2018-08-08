@@ -121,6 +121,8 @@ function updateStatistics() {
 }
 
 function updateSettings() {
+    setActiveStyleSheet("default");
+
     //show time during solves
     if (localStorage.getItem("showTime") == null) {showTime = true;} else {showTime = JSON.parse(localStorage.getItem("showTime"));}
     if (showTime == true) {document.getElementById("checkBoxHideShowTime").checked = false;} else {document.getElementById("checkBoxHideShowTime").checked = true;}
