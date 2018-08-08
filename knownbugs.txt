@@ -1,4 +1,4 @@
 -3x3 BLD scrambles are identical to 3x3 scrambles (missing wide moves)
--the discord button (bottom right) is not clickable while the menu is open
 -statistics numbers occasionally show too many digits
 -scramble drawing broke for seemingly no reason (after sessions update)
+-top bar is above the black backdrop when windows are open

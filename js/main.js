@@ -6,6 +6,7 @@ var timerOn = false;
 var timerReady = true;
 
 var settingsOpen = false;
+var windowOpen = false;
 
 //Converts the timer.js output strings into milliseconds for math purposes
 function toMS(str) {
@@ -84,12 +85,12 @@ var scrambleIndex = 0;
 var table = document.getElementById("solvesTable");
 
 //Stop the space bar from scrolling the page down
-window.onkeydown = function(e) { 
-    return !(e.keyCode === 32);
-};
+window.onkeydown = function(e) {
+    if (e.keyCode === 32 && settingsOpen == false) return false;
+}
 
 document.body.onkeyup = function(e) {
-    if (e.keyCode === 32) {
+    if (e.keyCode === 32 && windowOpen == false) {
         if (!watch.isStopped()) {
             watch.start();
 
@@ -108,6 +109,9 @@ document.body.onkeyup = function(e) {
             if (getActiveStyleSheet() === "light" || getActiveStyleSheet() == "ocean" || getActiveStyleSheet() == "ccff00" || getActiveStyleSheet() == "emerald") {
                 timer.style.color = "black";
             }
+
+            //add the used scramble to the array
+            usedScrambles.push(scramble.textContent);
 
             
             if (scrambleType === "222") {var generatedScramble = scramblers["222"].getRandomScramble();}
@@ -232,10 +236,13 @@ document.body.onkeydown = function(e) {
         var ao12Floated = parseFloat(ao12Formatted).toFixed(2);
 
         //solves
+        var currentScramble = usedScrambles[solves.length-1];
+        var fixedScramble = currentScramble.replace(/'/g, "&apos;");
+
         if (timeFormatted.includes(":")) {
-            col2.innerHTML = timeFormatted;
+            col2.innerHTML = "<span title='" + fixedScramble + "'>" + timeFormatted + "</span>";
         } else {
-            col2.innerHTML = timeFloated;
+            col2.innerHTML = "<span title='" + fixedScramble + "'>" + timeFloated + "</span>";
         }
 
         //ao5
@@ -260,63 +267,78 @@ document.body.onkeydown = function(e) {
         localStorage.setItem("ao12s", JSON.stringify(ao12s));
 
         localStorage.setItem("scrambleType", JSON.stringify(scrambleType));
+        localStorage.setItem("usedScrambles", JSON.stringify(usedScrambles));
 
         updateStatistics();
     } else {
-        //prepare to start timer 
-        if (e.keyCode === 32) {
-            watch.reset();
-            timer.style.color = 'red';
-        }
+        if (windowOpen == true) {
+            var dlsWindow = document.getElementById('deleteLastSolve');
+            var masWindow = document.getElementById('manualAddSolve');
 
-        //close any open menu
-        if (e.keyCode === 27) {
-            if (settingsOpen == true) {
-                settingsOpen = false;
-                modal.style.display = "none";
-            } else {
-                settingsOpen = true;
-                modal.style.display = "flex";
+            //close any open windows
+            if (e.keyCode === 27) {
+                if (dlsWindow.style.display == 'flex') dlsWindow.style.display = 'none';
+                if (masWindow.style.display == 'flex') masWindow.style.display = 'none';
+                windowOpen = false;
             }
-        }
 
-        //previous scramble (left arrow)
-        if (e.keyCode === 37 && scrambleIndex > 0) {
-            scrambleIndex -= 1;
-            scramble.textContent = scrambles[scrambleIndex];
-        }
-    
-        //next scramble (right arrow)
-        if (e.keyCode === 39 && scrambleIndex < scrambles.length-1) {
-            scrambleIndex += 1;
-            scramble.textContent = scrambles[scrambleIndex];
-        }
+            //delete last solve window
+            if (dlsWindow.style.display == 'flex') {
+                if (e.keyCode === 13) {
+                    deleteLastSolve();
+                }
+            }
 
-        //manually add solve (A key because chrome and firefox don't get along)
-        if (e.keyCode === 65) {
-            addSolve();
-        }
-    
-        //delete last solve (backspace)
-        if (e.keyCode === 8 && solves.length > 0) {
-            var delConfirm = confirm("Delete last solve?");
+            //manually add solve window
+            if (masWindow.style.display == 'flex') {
+                if (e.keyCode === 13) {
+                    addSolve();
+                }
+            }
+            
+        } else {
+            //prepare to start timer 
+            if (e.keyCode === 32) {
+                watch.reset();
+                timer.style.color = 'red';
+            }
 
-            if (delConfirm === true) {
-                solves.pop();
-                ao5s.pop();
-                ao12s.pop();
+            //open/close the settings menu
+            if (e.keyCode === 27) {
+                if (settingsOpen == true) {
+                    settingsOpen = false;
+                    modal.style.display = "none";
+                } else {
+                    settingsOpen = true;
+                    modal.style.display = "flex";
+                }
+                menuButtonAnimate(document.getElementById('menuButton'));
+            }
 
-                var row = table.deleteRow(1);
-                timer.textContent = "0.00";
+            //previous scramble (left arrow)
+            if (e.keyCode === 37 && scrambleIndex > 0) {
+                scrambleIndex -= 1;
+                scramble.textContent = scrambles[scrambleIndex];
+            }
+        
+            //next scramble (right arrow)
+            if (e.keyCode === 39 && scrambleIndex < scrambles.length-1) {
+                scrambleIndex += 1;
+                scramble.textContent = scrambles[scrambleIndex];
+            }
 
-                localStorage.setItem("sessions", JSON.stringify(sessions));
-                localStorage.setItem("seshNames", JSON.stringify(seshNames));
+            //manually add solve (shift)
+            if (e.keyCode === 16) {
+                document.getElementById("manualAddSolve").style.display = "flex";
+                document.getElementById("manualSolveInput").focus();
 
-                localStorage.setItem("solves", JSON.stringify(solves));
-                localStorage.setItem("ao5s", JSON.stringify(ao5s));
-                localStorage.setItem("ao12s", JSON.stringify(ao12s));
-
-                updateStatistics();
+                windowOpen = true;
+            }
+        
+            //delete last solve (backspace)
+            if (e.keyCode === 8 && solves.length > 0) {
+                document.getElementById("deleteLastSolve").style.display = "flex";
+                windowOpen = true;
             }
         }
     }

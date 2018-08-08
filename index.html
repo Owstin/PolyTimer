@@ -31,8 +31,13 @@
 <body onload="updateScrambleBox(); updateThemeBox(); updateSession(); updateSettings(); updateStatistics();">
     <div id="container">
         <div id="topBar">
-            <span id="menuButton">&#9776;</span>
-            <span id="logoText">PolyTimer</span><span style="font-size: 10pt;">&nbsp;&nbsp;Beta</span>
+            <!--<span id="menuButton">&#9776;</span>-->
+            <div id="menuButton" class="menuButtonHolder" onclick="menuButtonAnimate(this); menuOpenClose();">
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+            </div>
+            <span id="logoText">&nbsp;PolyTimer</span><span style="font-size: 10pt;">&nbsp;&nbsp;Beta</span>
         </div>
         <div id="fillerBar"></div>
         <div id="leftBlockShadow"></div>
@@ -78,6 +83,13 @@
                         var ao5s = JSON.parse(localStorage.getItem("ao5s"));
                         var ao12s = JSON.parse(localStorage.getItem("ao12s"));
                     }
+
+                    //update the stored scrambles if they're in local storage
+                    if (localStorage.getItem("usedScrambles") == null) {
+                        var usedScrambles = [];
+                    } else {
+                        var usedScrambles = JSON.parse(localStorage.getItem("usedScrambles"));
+                    }
                     
                     var tableContents = '';
 
@@ -90,14 +102,17 @@
 
                         var ao12Formatted = timeFormatter(ao12s[i]);
                         var ao12Floated = parseFloat(ao12Formatted).toFixed(2);
+
+                        var currentScramble = usedScrambles[i];
+                        var fixedScramble = currentScramble.replace(/'/g, "&apos;");
                         
                         tableContents += '<tr id="solvesTr"><td id="solvesTd">' + (i+1) + '</td>';
 
                         //solves
                         if (timeFormatted.includes(":")) {
-                            tableContents += '<td id="solvesTd">' + timeFormatted + '</td>';
+                            tableContents += '<td id="solvesTd">' + "<span title='" + fixedScramble + "'>" + timeFormatted + "</span>"; + '</td>';
                         } else {
-                            tableContents += '<td id="solvesTd">' + timeFloated + '</td>';
+                            tableContents += '<td id="solvesTd">' + "<span title='" + fixedScramble + "'>" + timeFloated + "</span>"; + '</td>';
                         }
 
                         //ao5
@@ -150,7 +165,7 @@
         <div class="modal-content">
 
             <button class="collapsible active">Statistics</button>
-            <div class="collapseContent" style="max-height: 310px;">
+            <div class="collapseContent" style="max-height: 322px;">
                 <div class="modal-body"><br>
                     <table style="width: 100%;">
                         <tr>
@@ -196,7 +211,8 @@
                             <td style="text-align: right;" id="statsAverageOf1000">0.00</td>
                         </tr>
                     </table>
-                <br></div>
+                    <p id="pLink" onclick="openAverageWindow()">Generate current average</p>
+                </div>
             </div>
 
             <button class="collapsible">Timer / Sessions</button>
@@ -219,8 +235,8 @@
                                 document.write(options);
                                 </script>
                             </select>
-                            <a id="clearLink" style="text-decoration: none;" onclick="renameSession()" title="Rename">&#9998;</a>
-                            <a id="clearLink" style="text-decoration: none;" onclick="deleteSession()" title="Delete">&#128465;</a>
+                            <a id="clearLink" style="text-decoration: none;" onclick="document.getElementById('renameCurSession').style.display = 'flex'; windowOpen = true;" title="Rename">&#9998;</a>
+                            <a id="clearLink" style="text-decoration: none;" onclick="document.getElementById('deleteCurSession').style.display = 'flex'; windowOpen = true;" title="Delete">&#128465;</a>
                             </td>
                         </tr>
                         <tr>
@@ -255,7 +271,7 @@
                         <p>Controls:</p>
                         <p><b>Start/Stop the timer:</b> Space bar</p>
                         <p><b>Open/close the menu:</b> Escape</p>
-                        <p><b>Manually add a solve:</b> 'A' Key</p>
+                        <p><b>Manually add a solve:</b> Shift</p>
                         <p><b>Delete the last solve:</b> Backspace</p>
                         <p><b>Last scramble:</b> Left arrow key</p>
                         <p><b>Next scramble:</b> Right arrow key</p>
@@ -321,24 +337,97 @@
         </div>
     </div>
 
-    <div id="discordPopUp" class="windowModal">
+    <div id="deleteLastSolve" class="windowModal">
         <div class="windowModal-content">
+            <div class="windowModal-header"><span style="padding-left: 10px;">DELETE LAST SOLVE</span></div>
+            <div style="text-align: center;" class="modal-body">
+                <br><p>Really delete the last solve?</p><br>
+            </div>
+            <div class="windowModal-buttons">
+                <button class="styledButton" onclick="deleteLastSolve()">Yes</button>
+                <button style="border-left: 1px solid #666;" class="styledButton" onclick="document.getElementById('deleteLastSolve').style.display = 'none'; windowOpen = false;">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="deleteCurSession" class="windowModal">
+        <div class="windowModal-content">
+            <div class="windowModal-header"><span style="padding-left: 10px;">DELETE CURRENT SESSION</span></div>
+            <div style="text-align: center;" class="modal-body">
+                <br><p>Really delete '<script>document.write(seshNames[currentSession]);</script>'?</p><br>
+            </div>
+            <div class="windowModal-buttons">
+                <button class="styledButton" onclick="deleteSession()">Yes</button>
+                <button style="border-left: 1px solid #666;" class="styledButton" onclick="document.getElementById('deleteCurSession').style.display = 'none'; windowOpen = false;">No</button>
+            </div>
+        </div>
+    </div>
+        
+    <div id="manualAddSolve" class="windowModal">
+        <div class="windowModal-content">
+            <div class="windowModal-header"><span style="padding-left: 10px;">MANUALLY ADD SOLVE</span></div>
             <div class="modal-body">
-                this is some SHIT mang
+                <p>Enter your solve time below.</p>
+                <input id="manualSolveInput">
+                <span style="font-size: 8pt">(Example: 4.22 or 1:14.86)</span>
+                <br><br>
+            </div>
+            <div class="windowModal-buttons">
+                <button class="styledButton" onclick="addSolve()">Yes</button>
+                <button style="border-left: 1px solid #666;" class="styledButton" onclick="document.getElementById('manualAddSolve').style.display = 'none'; windowOpen = false;">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="createNewSession" class="windowModal">
+        <div class="windowModal-content">
+            <div class="windowModal-header"><span style="padding-left: 10px;">CREATE NEW SESSION</span></div>
+            <div class="modal-body">
+                <p>Enter your new session name below.</p>
+                <input id="createSessionInput">
+                <br><br>
+            </div>
+            <div class="windowModal-buttons">
+                <button class="styledButton" onclick="createSession()">Yes</button>
+                <button style="border-left: 1px solid #666;" class="styledButton" onclick="document.getElementById('createNewSession').style.display = 'none'; windowOpen = false;">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="renameCurSession" class="windowModal">
+        <div class="windowModal-content">
+            <div class="windowModal-header"><span style="padding-left: 10px;">RENAME CURRENT SESSION</span></div>
+            <div class="modal-body">
+                <p>Enter the new name for '<script>document.write(seshNames[currentSession]);</script>' below.</p>
+                <input id="renameSessionInput">
+                <br><br>
+            </div>
+            <div class="windowModal-buttons">
+                <button class="styledButton" onclick="renameSession()">Yes</button>
+                <button style="border-left: 1px solid #666;" class="styledButton" onclick="document.getElementById('renameCurSession').style.display = 'none'; windowOpen = false;">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="genAverageText" class="windowModal">
+        <div class="windowModal-content" style="width: 550px;">
+            <div class="windowModal-header"><span style="padding-left: 10px;">GENERATE AVERAGE</span></div>
+            <div class="modal-body">
+                <p>Your generated average:</p>
+                <textarea rows="9" cols="70" id="genAvgTextArea"></textarea>
+                <br><br>
+            </div>
+            <div class="windowModal-buttons">
+                <button class="styledButton" onclick="copyAvgText();">Copy</button>
+                <button style="border-left: 1px solid #666;" class="styledButton" onclick="document.getElementById('genAverageText').style.display = 'none'; windowOpen = false;">Close</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Get the modal
         var modal = document.getElementById('settingsMenu');
-        var inputWindow = document.getElementById('inputWindow');
         
-        // Get the button that opens the modal
-        var menuButton = document.getElementById("menuButton");
-        
-        // When the user clicks the button, open the modal 
-        menuButton.onclick = function() {
+        function menuOpenClose() {
             if (settingsOpen == true) {
                 settingsOpen = false;
                 modal.style.display = "none";

@@ -27,18 +27,31 @@ body, html {
     background: transparent; /* make scrollbar transparent */
 }
 
+#pLink {
+    color: #FFF;
+    text-decoration: underline;
+}
+
+#pLink:hover {
+    color: #CCC;
+    cursor: pointer;
+}
+
 #container {
     width: 100%;
     height: 100%;
 }
 
 #topBar {
+    display: flex;
     position: fixed;
     background-color: #333;
     width: 100%;
     height: 40px;
     box-shadow: 0px 2px 20px 0px #000;
     z-index: 20;
+    align-items: center;
+    padding-left: 3px;
 }
 
 #fillerBar {
@@ -59,7 +72,7 @@ body, html {
 #leftBlockShadow {
     position: fixed;
     height: 100%;
-    width: 315px;;
+    width: 300px;;
     float: left;
     box-shadow: 0px 0px 20px 0px #000;
     pointer-events: none;
@@ -107,7 +120,7 @@ body, html {
 
 #rightBlock {
     height: 100%;
-    width: calc(100% - 315px);
+    width: calc(100% - 300px);
     float: right;
     margin: auto;
 }
@@ -216,7 +229,7 @@ body, html {
 .windowModal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 40; /* Sit on top */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -231,11 +244,44 @@ body, html {
     background-color: #444;
     margin: auto;
     padding: 0;
-    width: 275px;
+    width: 375px;
     -webkit-animation-name: slideDown;
     -webkit-animation-duration: 0.5s;
     animation-name: slideDown;
     animation-duration: 0.5;
+    box-shadow: 5px 5px 10px #000;
+}
+
+.windowModal-header {
+    display: flex;
+    background-color: #666;
+    width: 100%;
+    height: 45px;
+    justify-content: left;
+    align-items: center;
+    font-weight: bold;
+    font-size: 14pt;
+}
+
+.windowModal-buttons {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+}
+
+.styledButton {
+    background-color: #555;
+    color: #FFF;
+    font-size: 12pt;
+    height: 45px;
+    width: 100%;
+    border: none;
+}
+
+.styledButton:hover {
+    background-color: #666;
+    cursor: pointer;
 }
 
 /* Slide up animation */
@@ -298,4 +344,30 @@ body, html {
 
 .active:after {
     content: "\025B2"; /* Unicode character for "minus" sign (-) */
+}
+
+/*menu button*/
+.menuButtonHolder {
+    display: block;
+    cursor: pointer;
+}
+
+.bar1, .bar2, .bar3 {
+    width: 20px;
+    height: 2px;
+    background-color: #FFF;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+.change .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-5px, 6px);
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.change .bar2 {opacity: 0;}
+
+.change .bar3 {
+    -webkit-transform: rotate(45deg) translate(-5px, -7px);
+    transform: rotate(45deg) translate(-5px, -7px);
 }

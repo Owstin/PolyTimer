@@ -2,9 +2,9 @@ These are things that will be added in the future, in no particular order
 
 CURRENT TASKS:
 
+-inspection times
 -more detailed statistics
 -DNF and +2
--fix scramble drawing (broken by sessions update)
 
 EVERYTHING ELSE:
 
@@ -19,12 +19,10 @@ timer:
 solves table:
 -custom sorting (by number, best/worst times, etc)
 -import/export solves to and from database
--manually add solves
 -manually add move count
 -add notes about solves
 
 theme:
--more preset themes
 -custom color selection
 -custom font selection
 -background images
