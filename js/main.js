@@ -8,6 +8,9 @@ var timerReady = true;
 var settingsOpen = false;
 var windowOpen = false;
 
+var inspect = true;
+var inspection = new Inspection();
+
 //Converts the timer.js output strings into milliseconds for math purposes
 function toMS(str) {
     if(str.includes(":")) {
@@ -92,47 +95,56 @@ window.onkeydown = function(e) {
 document.body.onkeyup = function(e) {
     if (e.keyCode === 32 && windowOpen == false) {
         if (!watch.isStopped()) {
-            watch.start();
+            if (inspect == false) {
+                watch.start();
+                if (inspectionTime == true) {inspect = true;}
 
-            //hide scramble during solves option
-            if (hideScramble == true) {scramble.style.visibility = "hidden";}
+                //hide scramble during solves option
+                if (hideScramble == true) {scramble.style.visibility = "hidden";}
 
-            //hide solves table during solves option
-            if (hideSolves == true && document.getElementById("leftBlock").style.display == "flex") {
-                hideShowLeftBlock();
+                //hide solves table during solves option
+                if (hideSolves == true && document.getElementById("leftBlock").style.display == "flex") {
+                    hideShowLeftBlock();
+                }
+
+                if (getActiveStyleSheet() === "default") {
+                    timer.style.color = 'white';
+                }
+
+                if (getActiveStyleSheet() === "light" || getActiveStyleSheet() == "ocean" || getActiveStyleSheet() == "ccff00" || getActiveStyleSheet() == "emerald") {
+                    timer.style.color = "black";
+                }
+
+                //add the used scramble to the array
+                usedScrambles.push(scramble.textContent);
+
+                
+                if (scrambleType === "222") {var generatedScramble = scramblers["222"].getRandomScramble();}
+                if (scrambleType === "333") {var generatedScramble = scramblers["333"].getRandomScramble();}
+                if (scrambleType === "444") {var generatedScramble = scramblers["444"].getRandomScramble();}
+                if (scrambleType === "555") {var generatedScramble = scramblers["555"].getRandomScramble();}
+                if (scrambleType === "666") {var generatedScramble = scramblers["666"].getRandomScramble();}
+                if (scrambleType === "777") {var generatedScramble = scramblers["777"].getRandomScramble();}
+                
+                if (scrambleType === "333bf") {var generatedScramble = scramblers["333bf"].getRandomScramble();}
+                if (scrambleType === "minx") {var generatedScramble = scramblers["minx"].getRandomScramble();}
+                if (scrambleType === "pyram") {var generatedScramble = scramblers["pyram"].getRandomScramble();}
+                if (scrambleType === "sq1") {var generatedScramble = scramblers["sq1"].getRandomScramble();}
+                if (scrambleType === "clock") {var generatedScramble = scramblers["clock"].getRandomScramble();}
+                
+                scrambles.push(generatedScramble.scramble_string);
+                scramble.textContent = generatedScramble.scramble_string;
+                scrambleIndex += 1;
+
+                removeElement("scrambleDiv");
+                updateScramble();
+            } else {
+                inspect = false;
+                inspection.start();
+                
+                //hide scramble during solves option
+                if (hideScramble == true) {scramble.style.visibility = "hidden";}
             }
-
-            if (getActiveStyleSheet() === "default") {
-                timer.style.color = 'white';
-            }
-
-            if (getActiveStyleSheet() === "light" || getActiveStyleSheet() == "ocean" || getActiveStyleSheet() == "ccff00" || getActiveStyleSheet() == "emerald") {
-                timer.style.color = "black";
-            }
-
-            //add the used scramble to the array
-            usedScrambles.push(scramble.textContent);
-
-            
-            if (scrambleType === "222") {var generatedScramble = scramblers["222"].getRandomScramble();}
-            if (scrambleType === "333") {var generatedScramble = scramblers["333"].getRandomScramble();}
-            if (scrambleType === "444") {var generatedScramble = scramblers["444"].getRandomScramble();}
-            if (scrambleType === "555") {var generatedScramble = scramblers["555"].getRandomScramble();}
-            if (scrambleType === "666") {var generatedScramble = scramblers["666"].getRandomScramble();}
-            if (scrambleType === "777") {var generatedScramble = scramblers["777"].getRandomScramble();}
-            
-            if (scrambleType === "333bf") {var generatedScramble = scramblers["333bf"].getRandomScramble();}
-            if (scrambleType === "minx") {var generatedScramble = scramblers["minx"].getRandomScramble();}
-            if (scrambleType === "pyram") {var generatedScramble = scramblers["pyram"].getRandomScramble();}
-            if (scrambleType === "sq1") {var generatedScramble = scramblers["sq1"].getRandomScramble();}
-            if (scrambleType === "clock") {var generatedScramble = scramblers["clock"].getRandomScramble();}
-            
-            scrambles.push(generatedScramble.scramble_string);
-            scramble.textContent = generatedScramble.scramble_string;
-            scrambleIndex += 1;
-
-            removeElement("scrambleDiv");
-            updateScramble();
         } else {
             watch.ready();
         }
@@ -300,6 +312,7 @@ document.body.onkeydown = function(e) {
             //prepare to start timer 
             if (e.keyCode === 32) {
                 watch.reset();
+                inspection.stop();
                 timer.style.color = 'red';
             }
 

@@ -26,6 +26,7 @@
     <!--other stuff-->
     <script type="text/javascript" src="js/functions.js"></script>
     <script type="text/javascript" src="js/sessions.js"></script>
+    <script type="text/javascript" src="js/inspection.js"></script>
 </head>
 
 <body onload="updateScrambleBox(); updateThemeBox(); updateSession(); updateSettings(); updateStatistics();">
@@ -259,11 +260,15 @@
                         </tr>
                     </table><br>
 
-                    <!--<table> un-comment this when scramble drawing is fixed
+                    <table>
                         <tr>
-                            <td style="padding: 2px;"><input type="checkbox" id="checkBoxHideShowScramble" onclick="hideShowScramble();"></td><td style="padding: 2px;"> Draw scramble</td>
+                            <td style="padding: 2px;"><input type="checkbox" id="checkBoxInspection" onclick="toggleInspection();"></td><td style="padding: 2px;"> Use WCA inspection</td>
                         </tr>
-                    </table>-->
+
+                        <!--<tr> un-comment this when scramble drawing is fixed
+                            <td style="padding: 2px;"><input type="checkbox" id="checkBoxHideShowScramble" onclick="hideShowScramble();"></td><td style="padding: 2px;"> Draw scramble</td>
+                        </tr>-->
+                    </table>
 
                     <hr>
 

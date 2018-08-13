@@ -8,11 +8,8 @@ CURRENT TASKS:
 
 EVERYTHING ELSE:
 
-scramble:
--save scrambles with solves for later reference
 
 timer:
--inspection times
 -start key options
 -hold for a few seconds to start
 

@@ -123,6 +123,10 @@ function updateStatistics() {
 function updateSettings() {
     setActiveStyleSheet("default");
 
+    //use inspection times
+    if (localStorage.getItem("inspectionTime") == null) {inspectionTime = false;} else {inspectionTime = JSON.parse(localStorage.getItem("inspectionTime"));}
+    if (inspectionTime == true) {document.getElementById("checkBoxInspection").checked = true;} else {document.getElementById("checkBoxInspection").checked = false;}
+
     //show time during solves
     if (localStorage.getItem("showTime") == null) {showTime = true;} else {showTime = JSON.parse(localStorage.getItem("showTime"));}
     if (showTime == true) {document.getElementById("checkBoxHideShowTime").checked = false;} else {document.getElementById("checkBoxHideShowTime").checked = true;}
@@ -216,6 +220,13 @@ function hideShowScramble() {
     }
 
     localStorage.setItem("drawScramble", JSON.stringify(drawScramble));
+}
+
+function toggleInspection() {
+    if (inspectionTime == true) {inspectionTime = false; inspect = false;}
+    else {inspectionTime = true; inspect = true;}
+
+    localStorage.setItem("inspectionTime", JSON.stringify(inspectionTime));
 }
 
 function openAverageWindow() {
