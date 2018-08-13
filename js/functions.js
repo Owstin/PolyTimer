@@ -122,18 +122,27 @@ function updateStatistics() {
 
 function updateSettings() {
     setActiveStyleSheet("default");
+    hideScramble = true;
 
     //use inspection times
     if (localStorage.getItem("inspectionTime") == null) {inspectionTime = false;} else {inspectionTime = JSON.parse(localStorage.getItem("inspectionTime"));}
     if (inspectionTime == true) {document.getElementById("checkBoxInspection").checked = true;} else {document.getElementById("checkBoxInspection").checked = false;}
 
+    //use warning audio
+    if (localStorage.getItem("warningAudio") == null) {warningAudio = true;} else {warningAudio = JSON.parse(localStorage.getItem("warningAudio"));}
+    if (warningAudio == true) {document.getElementById("checkBoxWarningAudio").checked = true;} else {document.getElementById("checkBoxWarningAudio").checked = false;}
+
+    //updating warning voice
+    if (localStorage.getItem("warningVoice") == null) {warningVoice = 'male';} else {warningVoice = JSON.parse(localStorage.getItem("warningVoice"));}
+    document.getElementById('warningVoiceSelect').value = warningVoice;
+
     //show time during solves
     if (localStorage.getItem("showTime") == null) {showTime = true;} else {showTime = JSON.parse(localStorage.getItem("showTime"));}
     if (showTime == true) {document.getElementById("checkBoxHideShowTime").checked = false;} else {document.getElementById("checkBoxHideShowTime").checked = true;}
 
-    //hide scramble during solves
-    if (localStorage.getItem("hideScramble") == null) {hideScramble = false;} else {hideScramble = JSON.parse(localStorage.getItem("hideScramble"));}
-    if (hideScramble == true) {document.getElementById("checkBoxHideShowScrambleText").checked = true;} else {document.getElementById("checkBoxHideShowScrambleText").checked = false;}
+    //hide scramble during solves (deprecated)
+    //if (localStorage.getItem("hideScramble") == null) {hideScramble = false;} else {hideScramble = JSON.parse(localStorage.getItem("hideScramble"));}
+    //if (hideScramble == true) {document.getElementById("checkBoxHideShowScrambleText").checked = true;} else {document.getElementById("checkBoxHideShowScrambleText").checked = false;}
 
     //hide solves table during solves
     document.getElementById("leftBlock").style.display = "flex";
@@ -227,6 +236,18 @@ function toggleInspection() {
     else {inspectionTime = true; inspect = true;}
 
     localStorage.setItem("inspectionTime", JSON.stringify(inspectionTime));
+}
+
+function toggleWarningAudio() {
+    if (warningAudio == true) {warningAudio = false;}
+    else {warningAudio = true;;}
+
+    localStorage.setItem("warningAudio", JSON.stringify(warningAudio));
+}
+
+function changeWarningVoice() {
+    warningVoice = document.getElementById("warningVoiceSelect").value;
+    localStorage.setItem("warningVoice", JSON.stringify(warningVoice));
 }
 
 function openAverageWindow() {

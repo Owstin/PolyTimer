@@ -265,6 +265,15 @@
                             <td style="padding: 2px;"><input type="checkbox" id="checkBoxInspection" onclick="toggleInspection();"></td><td style="padding: 2px;"> Use WCA inspection</td>
                         </tr>
 
+                        <tr>
+                            <td style="padding: 2px;"><input type="checkbox" id="checkBoxWarningAudio" onclick="toggleWarningAudio();"></td><td style="padding: 2px;"> Warning voice: 
+                                <select id="warningVoiceSelect" onchange="changeWarningVoice();">
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </td>
+                        </tr>
+
                         <!--<tr> un-comment this when scramble drawing is fixed
                             <td style="padding: 2px;"><input type="checkbox" id="checkBoxHideShowScramble" onclick="hideShowScramble();"></td><td style="padding: 2px;"> Draw scramble</td>
                         </tr>-->
@@ -305,9 +314,9 @@
                         <tr>
                             <td style="padding: 2px;"><input type="checkbox" id="checkBoxHideShowTime" onclick="hideShowTime();"></td><td style="padding: 2px;"> Hide time while solving</td>
                         </tr>
-                        <tr>
+                        <!--<tr> this option became pointless
                             <td style="padding: 2px;"><input type="checkbox" id="checkBoxHideShowScrambleText" onclick="hideShowScrambleText();"></td><td style="padding: 2px;"> Hide scramble while solving</td>
-                        </tr>
+                        </tr>-->
                         <tr>
                             <td style="padding: 2px;"><input type="checkbox" id="checkBoxHideShowSolves" onclick="hideShowSolvesTable();"></td><td style="padding: 2px;"> Hide solves table while solving</td>
                         </tr>
