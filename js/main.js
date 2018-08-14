@@ -8,7 +8,6 @@ var timerReady = true;
 var settingsOpen = false;
 var windowOpen = false;
 
-var inspect = true;
 var inspection = new Inspection();
 
 //Converts the timer.js output strings into milliseconds for math purposes
@@ -141,7 +140,7 @@ document.body.onkeyup = function(e) {
             } else {
                 inspect = false;
                 inspection.start();
-                
+
                 //hide scramble during solves option
                 if (hideScramble == true) {scramble.style.visibility = "hidden";}
             }
