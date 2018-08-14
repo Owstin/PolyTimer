@@ -8,14 +8,14 @@ var female12 = new Audio('snd/female_12sec.wav');
 
 function Inspection() {
     var interval = null;
-    var seconds = 0;
+    var seconds = 15;
     
     function update() {
         if (inspecting == true) {
-            seconds++;
-            if (seconds < 16) {timer.textContent = seconds;}
+            seconds--;
+            if (seconds > -1) {timer.textContent = seconds;}
             else {
-                if (seconds > 17) {timer.textContent = "DNF";}
+                if (seconds < -2) {timer.textContent = "DNF";}
                 else {timer.textContent = "+2";}
             }
 
@@ -25,7 +25,7 @@ function Inspection() {
                     if (warningVoice == "female") {female8.play();}
                 }
 
-                if (seconds == 12) {
+                if (seconds == 3) {
                     if (warningVoice == "male") {male12.play();}
                     if (warningVoice == "female") {female12.play();}
                 }
@@ -35,15 +35,15 @@ function Inspection() {
     
     this.start = function() {
         interval = setInterval(update.bind(this), 1000);
-        timer.textContent = "0";
+        timer.textContent = "15";
         timer.style.color = "#FFF";
-        seconds = 0;
+        seconds = 15;
         inspecting = true;
     }
     
     this.stop = function() {
       clearInterval(interval);
       inspecting = false;
-      seconds = 0;
+      seconds = 15;
     }
 }
