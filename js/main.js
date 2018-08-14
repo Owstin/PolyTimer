@@ -8,7 +8,6 @@ var timerReady = true;
 var settingsOpen = false;
 var windowOpen = false;
 
-var inspect = true;
 var inspection = new Inspection();
 
 //Converts the timer.js output strings into milliseconds for math purposes
@@ -141,7 +140,7 @@ document.body.onkeyup = function(e) {
             } else {
                 inspect = false;
                 inspection.start();
-                
+
                 //hide scramble during solves option
                 if (hideScramble == true) {scramble.style.visibility = "hidden";}
             }
@@ -274,12 +273,16 @@ document.body.onkeydown = function(e) {
         ao5s.push(ao5);
         ao12s.push(ao12);
 
+        mods.push(0);
+
         localStorage.setItem("solves", JSON.stringify(solves));
         localStorage.setItem("ao5s", JSON.stringify(ao5s));
         localStorage.setItem("ao12s", JSON.stringify(ao12s));
 
         localStorage.setItem("scrambleType", JSON.stringify(scrambleType));
         localStorage.setItem("usedScrambles", JSON.stringify(usedScrambles));
+
+        localStorage.setItem("mods", JSON.stringify(mods));
 
         updateStatistics();
     } else {

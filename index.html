@@ -74,6 +74,8 @@
                         var solves = [];
                         var ao5s = [];
                         var ao12s = [];
+
+                        var mods = [];
                     } else {
                         //var solves = JSON.parse(localStorage.getItem("solves"));
                         if (sessions[currentSession]) {
@@ -83,6 +85,8 @@
                         }
                         var ao5s = JSON.parse(localStorage.getItem("ao5s"));
                         var ao12s = JSON.parse(localStorage.getItem("ao12s"));
+                        
+                        var mods = JSON.parse(localStorage.getItem("mods"));
                     }
 
                     //update the stored scrambles if they're in local storage
@@ -111,9 +115,29 @@
 
                         //solves
                         if (timeFormatted.includes(":")) {
-                            tableContents += '<td id="solvesTd">' + "<span title='" + fixedScramble + "'>" + timeFormatted + "</span>"; + '</td>';
+                            if (mods[i] == 0) {
+                                tableContents += '<td id="solvesTd">' + "<span title='" + fixedScramble + "'>" + timeFormatted + "</span>"; + '</td>';
+                            } else {
+                                if (mods[i] == 1) { //+2
+                                    tableContents += '<td id="solvesTd">' + "<span title='" + fixedScramble + "'>" + timeFormatted + "+</span>"; + '</td>';
+                                }
+
+                                if (mods[i] == 2) { //DNF
+                                    tableContents += '<td id="solvesTd">' + "<span title='" + fixedScramble + "'>DNF</span>"; + '</td>';
+                                }
+                            }
                         } else {
-                            tableContents += '<td id="solvesTd">' + "<span title='" + fixedScramble + "'>" + timeFloated + "</span>"; + '</td>';
+                            if (mods[i] == 0) {
+                                tableContents += '<td id="solvesTd">' + "<span title='" + fixedScramble + "'>" + timeFloated + "</span>"; + '</td>';
+                            } else {
+                                if (mods[i] == 1) { //+2
+                                    tableContents += '<td id="solvesTd">' + "<span title='" + fixedScramble + "'>" + timeFloated + "+</span>"; + '</td>';
+                                }
+
+                                if (mods[i] == 2) { //DNF
+                                    tableContents += '<td id="solvesTd">' + "<span title='" + fixedScramble + "'>DNF</span>"; + '</td>';
+                                }
+                            }
                         }
 
                         //ao5
