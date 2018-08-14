@@ -136,6 +136,14 @@ function updateSettings() {
     if (localStorage.getItem("warningVoice") == null) {warningVoice = 'male';} else {warningVoice = JSON.parse(localStorage.getItem("warningVoice"));}
     document.getElementById('warningVoiceSelect').value = warningVoice;
 
+    //use warning audio
+    if (localStorage.getItem("warningAudio") == null) {warningAudio = true;} else {warningAudio = JSON.parse(localStorage.getItem("warningAudio"));}
+    if (warningAudio == true) {document.getElementById("checkBoxWarningAudio").checked = true;} else {document.getElementById("checkBoxWarningAudio").checked = false;}
+
+    //updating warning voice
+    if (localStorage.getItem("warningVoice") == null) {warningVoice = 'male';} else {warningVoice = JSON.parse(localStorage.getItem("warningVoice"));}
+    document.getElementById('warningVoiceSelect').value = warningVoice;
+
     //show time during solves
     if (localStorage.getItem("showTime") == null) {showTime = true;} else {showTime = JSON.parse(localStorage.getItem("showTime"));}
     if (showTime == true) {document.getElementById("checkBoxHideShowTime").checked = false;} else {document.getElementById("checkBoxHideShowTime").checked = true;}
